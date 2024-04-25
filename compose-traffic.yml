@@ -3,6 +3,8 @@
 # wireguard establishes the vpn connection to a virtual machine elsewhere that acts as a 
 # public access point so no ports on my home router need to be exposed
 
+version: '3.3'
+
 services:
   nginxproxymanager:
     image: 'jc21/nginx-proxy-manager:latest'
