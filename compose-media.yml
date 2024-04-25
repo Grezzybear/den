@@ -20,7 +20,7 @@ services:
     network_mode: "service:proton"
 
   # for protonvpn
-  gluetun:
+  proton:
     image: qmcgaw/gluetun
     container_name: proton
     cap_add:
