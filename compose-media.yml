@@ -1,6 +1,58 @@
 version: '3.3'
 
 services:
+  # for downloading torrents
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - WEBUI_PORT=8085
+      - TORRENTING_PORT=6881
+    volumes:
+      - ${DOCKER_BASE}/qbittorrent/config:/config
+      - ${DOWNLOADS}:/downloads
+    restart: unless-stopped
+    depends_on: 
+      - proton
+    network_mode: "service:proton"
+
+  # for protonvpn
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: proton
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    ports:
+      - 6881:6881
+      - 6881:6881/udp
+      - 8085:8085 # qbittorrent
+    volumes:
+      - ${DOCKER_BASE}/proton:/gluetun
+    environment:
+      - VPN_SERVICE_PROVIDER=custom
+      - VPN_TYPE=wireguard
+      # Wireguard:
+      - VPN_ENDPOINT_IP=/run/secrets/wg_endpoint
+      - VPN_ENDPOINT_PORT=51820
+      - WIREGUARD_PUBLIC_KEY=/run/secrets/wg_public_key
+#      - WIREGUARD_PRESHARED_KEY=
+      - WIREGUARD_PRIVATE_KEY=/run/secrets/wg_private_key
+      - WIREGUARD_ADDRESSES=10.2.0.2/32
+      - TZ=Etc/UTC
+      # Server list updater
+      # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
+      - UPDATER_PERIOD=24h
+    secrets:
+       - wg_endpoint
+       - wg_public_key
+       - wg_private_key
+
+  # for media browsing
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
@@ -12,29 +64,41 @@ services:
       - ${TV}:/data/tvshows
       - ${MOVIE}:/data/movies
     restart: 'unless-stopped'
+
+  # for media requests
   jellyseerr:
-       image: fallenbagel/jellyseerr:latest
-       container_name: jellyseerr
-       environment:
-            - LOG_LEVEL=debug
-            - TZ=${TZ}
-       ports:
-            - 5055:5055
-       volumes:
-            - ${DOCKER_BASE}/jellyseer/config:/app/config
-       restart: unless-stopped
-  prowlarr:
-      image: lscr.io/linuxserver/prowlarr:latest
-      container_name: prowlarr
-      environment:
-        - PUID=${PUID}
-        - PGID=${PGID}
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    environment:
+        - LOG_LEVEL=debug
         - TZ=${TZ}
-      volumes:
-        - ${DOCKER_BASE}/prowlarr/data:/config
-      ports:
-        - 9696:9696
-      restart: unless-stopped
+    ports:
+        - 5055:5055
+    volumes:
+        - ${DOCKER_BASE}/jellyseer/config:/app/config
+    restart: unless-stopped
+    depends_on: 
+      - proton
+    network_mode: "service:proton"
+
+  # for index management
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${DOCKER_BASE}/prowlarr/data:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+    depends_on: 
+      - proton
+    network_mode: "service:proton"
+
+  # for tv
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
@@ -49,6 +113,11 @@ services:
     ports:
       - 8989:8989
     restart: unless-stopped
+    depends_on: 
+      - proton
+    network_mode: "service:proton"
+
+  # for movies
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
@@ -63,6 +132,11 @@ services:
     ports:
       - 7878:7878
     restart: unless-stopped
+    depends_on: 
+      - proton
+    network_mode: "service:proton"
+
+  # for books
   readarr:
     image: lscr.io/linuxserver/readarr:develop
     container_name: readarr
@@ -77,6 +151,11 @@ services:
     ports:
       - 8787:8787
     restart: unless-stopped
+    depends_on: 
+      - proton
+    network_mode: "service:proton"
+  
+  # for music
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest
     container_name: lidarr
@@ -91,6 +170,11 @@ services:
     ports:
       - 8686:8686
     restart: unless-stopped
+    depends_on: 
+      - proton
+    network_mode: "service:proton"
+
+  # for subtitles
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
@@ -105,6 +189,11 @@ services:
     ports:
       - 6767:6767
     restart: unless-stopped
+    depends_on: 
+      - proton
+    network_mode: "service:proton"
+
+  # for book metadata
   lazylibrarian:
     image: lscr.io/linuxserver/lazylibrarian:latest
     container_name: lazylibrarian
@@ -120,6 +209,11 @@ services:
     ports:
       - 5299:5299
     restart: unless-stopped
+    depends_on: 
+      - proton
+    network_mode: "service:proton"
+
+  # for rss feeds
   freshrss:
     image: lscr.io/linuxserver/freshrss:latest
     container_name: freshrss
@@ -132,8 +226,19 @@ services:
     ports:
       - 82:82
     restart: unless-stopped
+    depends_on: 
+      - proton
+    network_mode: "service:proton"
     
 networks:
   default:
     external: true
     name: nginx-network
+
+secrets:
+   wg_endpoint:
+     file: .secrets/wg_endpoint
+   wg_public_key:
+     file: .secrets/wg_public_key
+   wg_private_key:
+     file: .secrets/wg_private_key
