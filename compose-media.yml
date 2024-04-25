@@ -214,7 +214,7 @@ services:
     volumes:
       - ${DOCKER_BASE}/freshrss/config:/config
     ports:
-      - 82:82
+      - 8080:80
     restart: unless-stopped
     
 networks:
