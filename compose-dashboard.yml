@@ -4,7 +4,7 @@
 # config info can be found here:
 # https://gethomepage.dev/latest/configs/
 
-version: "1.0"
+version: "3.3"
 
 services:
   homepage:
