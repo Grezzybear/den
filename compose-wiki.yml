@@ -1,5 +1,7 @@
 # compose for a general use personal wiki and could serve as a template for specific wiki copies in the future
 
+version: '3.3'
+
 services:
   db:
     image: postgres:16
