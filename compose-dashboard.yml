@@ -1,0 +1,20 @@
+# Hopepage seems like the best and most flexible dashboard right now
+# great built in widget support and yaml support for structure
+
+# config info can be found here:
+# https://gethomepage.dev/latest/configs/
+
+version: "1.0"
+
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+    ports:
+      - 3000:3000
+    volumes:
+      - ${DOCKER_BASE}/homepage/config:/app/config # Make sure your local config directory exists
+      - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
