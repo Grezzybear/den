@@ -1,0 +1,54 @@
+# this compose creates a stack that manages the traffic for the home network
+# nginxproxymanager acts as a reverse proxy to the rest of the apps that have a subdomain
+# wireguard establishes the vpn connection to a virtual machine elsewhere that acts as a 
+# public access point so no ports on my home router need to be exposed
+
+services:
+  nginxproxymanager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nginxproxymanager
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    networks:
+      - default
+      - nginx-network
+    volumes:
+      - ${DOCKER_BASE}/nginx/data:/data
+      - ${DOCKER_BASE}/nginx/letsencrypt:/etc/letsencrypt
+  wireguard:
+    image: lscr.io/linuxserver/wireguard:latest
+    container_name: wireguard
+    cap_add:
+      - NET_ADMIN
+#      - SYS_MODULE #optional
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+#      - SERVERURL=wireguard.domain.com #optional
+#      - SERVERPORT=51820 #optional
+#      - PEERDNS=auto #optional
+#      - INTERNAL_SUBNET=10.13.13.0 #optional
+#      - ALLOWEDIPS=0.0.0.0/0 #optional
+#      - PERSISTENTKEEPALIVE_PEERS= #optional
+#      - LOG_CONFS=true #optional
+    volumes:
+      - ${DOCKER_BASE}/wireguard/config:/config
+#      - /lib/modules:/lib/modules #optional
+    ports:
+      - 51820:51820/udp
+    networks:
+      - default
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    restart: unless-stopped
+
+networks:
+  default:
+    external: true
+    name: vpn-traffic
+  nginx-network:
+    external: true
