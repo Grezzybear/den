@@ -1,6 +1,8 @@
 # this compose holds apps for visualizing the status of docker containers and 
 # keep information on other containers
 
+version: "3.3"
+
 services:
   dozzle:
     container_name: dozzle
