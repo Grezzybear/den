@@ -23,6 +23,8 @@ services:
       - 5299:5299 # lazylibrarian
     volumes:
       - ${BASE}/config/proton-config:/gluetun
+    networks:
+      - default
     env_file:
       - .env.secret # holds the end point and keys
     environment:
@@ -71,12 +73,15 @@ services:
     volumes:
       - ${BASE}/config/jellyfin-config:/config
       - ${BASE}/data/media:/data
+    networks:
+      - nginx-network
     restart: 'unless-stopped'
 
   # for listening to audio books
   audiobookshelf:
     image: ghcr.io/advplyr/audiobookshelf:latest
     container_name: audiobookshelf
+    user: 10004:10000
     environment:
       - TZ=${TZ}
       - UMASK=002
@@ -89,6 +94,8 @@ services:
       - ${BASE}/data/media/audiobooks:/audiobooks
       - ${BASE}/data/media/podcasts:/podcasts
       - ${BASE}/data/media/audiobookshelf-metadata:/metadata
+    networks:
+      - nginx-network
     restart: unless-stopped
 
   # for media requests
@@ -105,6 +112,8 @@ services:
       - 5055:5055
     volumes:
       - ${BASE}/config/jellyseerr-config:/app/config
+    networks:
+      - nginx-network
     restart: unless-stopped
 
   # for index management
