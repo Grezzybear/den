@@ -1,21 +1,21 @@
 #!/bin/bash
 
 # Make users and group
-sudo useradd proton -u 13001
-sudo useradd qbittorrent -u 13002
-sudo useradd jellyfin -u 13003
-sudo useradd audiobookshelf -u 13004
-sudo useradd jellyseer -u 13005
-sudo useradd prowlarr -u 13006
-sudo useradd flaresolverr -u 13007
-sudo useradd sonarr -u 13008
-sudo useradd radarr -u 13009
-sudo useradd readarr -u 13010
-sudo useradd lidarr -u 13011
-sudo useradd bazarr -u 13012
-sudo useradd lazylibrarian -u 13013
-sudo useradd freshrss -u 13014
-sudo groupadd mediacenter -g 13000
+sudo useradd proton -u 10001
+sudo useradd qbittorrent -u 10002
+sudo useradd jellyfin -u 10003
+sudo useradd audiobookshelf -u 10004
+sudo useradd jellyseer -u 10005
+sudo useradd prowlarr -u 10006
+sudo useradd flaresolverr -u 10007
+sudo useradd sonarr -u 10008
+sudo useradd radarr -u 10009
+sudo useradd readarr -u 10010
+sudo useradd lidarr -u 10011
+sudo useradd bazarr -u 10012
+sudo useradd lazylibrarian -u 10013
+sudo useradd freshrss -u 10014
+sudo groupadd mediacenter -g 10000
 sudo usermod -a -G mediacenter proton
 sudo usermod -a -G mediacenter qbittorrent
 sudo usermod -a -G mediacenter jellyfin
@@ -56,19 +56,19 @@ sudo chown -R freshrss:mediacenter config/freshrss-config
 # set our base env values
 echo "UID=$(id -u)" >> .env
 echo "BASE=$(pwd)" >> .env
-"PROTON-UID=13001" >> .env
-"QBIT-UID=13002" >> .env
-"JELLYFIN-UID=13003" >> .env
-"AUDIOBOOK-UID=13004" >> .env
-"SEER-UID=13005" >> .env
-"PROWLARR-UID=13006" >> .env
-"FLARESOLVERR-UID=13007" >> .env
-"SONARR-UID=13008" >> .env
-"RADARR-UID=13009" >> .env
-"READARR-UID=13010" >> .env
-"LIDARR-UID=13011" >> .env
-"BAZARR-UID=13012" >> .env
-"LAZYLIBRARIAN-UID=13013" >> .env
-"FRESHRSS-UID=13014" >> .env
-"MEDIA-GID=13000" >> .env
+"PROTON-UID=10001" >> .env
+"QBIT-UID=10002" >> .env
+"JELLYFIN-UID=10003" >> .env
+"AUDIOBOOK-UID=10004" >> .env
+"SEER-UID=10005" >> .env
+"PROWLARR-UID=10006" >> .env
+"FLARESOLVERR-UID=10007" >> .env
+"SONARR-UID=10008" >> .env
+"RADARR-UID=10009" >> .env
+"READARR-UID=10010" >> .env
+"LIDARR-UID=10011" >> .env
+"BAZARR-UID=10012" >> .env
+"LAZYLIBRARIAN-UID=10013" >> .env
+"FRESHRSS-UID=10014" >> .env
+"MEDIA-GID=10000" >> .env
 "TZ=Etc/UTC" >> .env
