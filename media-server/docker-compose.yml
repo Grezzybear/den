@@ -28,8 +28,8 @@ services:
     environment:
       - VPN_SERVICE_PROVIDER=custom
       - VPN_TYPE=wireguard
-      - PUID=${PROTON-UID}
-      - PGID=${MEDIA-GID}
+#      - PUID=${PROTON-UID}
+#      - PGID=${MEDIA-GID}
       # Wireguard:
 #      - VPN_ENDPOINT_IP=/run/secrets/wg_endpoint
       - VPN_ENDPOINT_PORT=51820
@@ -134,6 +134,8 @@ services:
       - LOG_LEVEL=${LOG_LEVEL:-info}
       - LOG_HTML=${LOG_HTML:-false}
       - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
+      - PUID=${FLARESOLVERR-UID}
+      - PGID=${MEDIA-GID}
       - TZ=${TZ}
       - UMASK=002
     depends_on: 
