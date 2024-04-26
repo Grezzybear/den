@@ -55,7 +55,7 @@ services:
       - ${BASE}/config/qbittorrent-config:/config
       - ${BASE}/data/torrents:/data/torrents
     restart: unless-stopped
-    depends_on: 
+    depends_on:
       - proton
     network_mode: "service:proton"
 
@@ -67,7 +67,7 @@ services:
       - PUID=10003
       - PGID=10000
       - UMASK=002
-    ports: 
+    ports:
       - '8096:8096'
     volumes:
       - ${BASE}/config/jellyfin-config:/config
@@ -164,7 +164,7 @@ services:
       - ${BASE}/config/sonarr-config:/config
       - ${BASE}/data:/data
     restart: unless-stopped
-    depends_on: 
+    depends_on:
       - proton
     network_mode: "service:proton"
 
@@ -181,7 +181,7 @@ services:
       - ${BASE}/config/radarr-config:/config
       - ${BASE}/data:/data
     restart: unless-stopped
-    depends_on: 
+    depends_on:
       - proton
     network_mode: "service:proton"
 
@@ -198,10 +198,10 @@ services:
       - ${BASE}/config/readarr-config:/config
       - ${BASE}/data:/data
     restart: unless-stopped
-    depends_on: 
+    depends_on:
       - proton
     network_mode: "service:proton"
-  
+
   # for music
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest
@@ -215,7 +215,7 @@ services:
       - ${BASE}/config/lidarr-config:/config
       - ${BASE}/data:/data
     restart: unless-stopped
-    depends_on: 
+    depends_on:
       - proton
     network_mode: "service:proton"
 
@@ -232,7 +232,7 @@ services:
       - ${BASE}/config/bazarr-config:/config
       - ${BASE}/data:/data
     restart: unless-stopped
-    depends_on: 
+    depends_on:
       - proton
     network_mode: "service:proton"
 
@@ -240,18 +240,17 @@ services:
   lazylibrarian:
     image: lscr.io/linuxserver/lazylibrarian:latest
     container_name: lazylibrarian
-    user: 10013:10000
     environment:
       - PUID=10013
       - PGID=10000
       - TZ=${TZ}
       - UMASK=002
-      - DOCKER_MODS=linuxserver/mods:universal-calibre|linuxserver/mods:lazylibrarian-ffmpeg #optional
+      - DOCKER_MODS=linuxserver/mods:lazylibrarian-ffmpeg #optional
     volumes:
       - ${BASE}/config/lazylibrarian-config:/config
       - ${BASE}/data:/data
     restart: unless-stopped
-    depends_on: 
+    depends_on:
       - proton
     network_mode: "service:proton"
 
@@ -269,7 +268,7 @@ services:
     ports:
       - 8080:80
     restart: unless-stopped
-    
+
 networks:
   default:
     name: media-network
