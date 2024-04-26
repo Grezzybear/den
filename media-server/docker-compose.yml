@@ -101,6 +101,7 @@ services:
   jellyseerr:
     image: fallenbagel/jellyseerr:latest
     container_name: jellyseerr
+    user: 10005:10000
     environment:
       - LOG_LEVEL=debug
       - TZ=${TZ}
@@ -239,6 +240,7 @@ services:
   lazylibrarian:
     image: lscr.io/linuxserver/lazylibrarian:latest
     container_name: lazylibrarian
+    user: 10013:10000
     environment:
       - PUID=10013
       - PGID=10000
