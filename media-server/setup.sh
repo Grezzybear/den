@@ -54,21 +54,21 @@ sudo chown -R lazylibrarian:mediacenter config/lazylibrarian-config
 sudo chown -R freshrss:mediacenter config/freshrss-config
 
 # set our base env values
-echo "UID=$(id -u)" >> .env
+#echo "UID=$(id -u)" >> .env
 echo "BASE=$(pwd)" >> .env
-echo "PROTON-UID=10001" >> .env
-echo "QBIT-UID=10002" >> .env
-echo "JELLYFIN-UID=10003" >> .env
-echo "AUDIOBOOK-UID=10004" >> .env
-echo "SEER-UID=10005" >> .env
-echo "PROWLARR-UID=10006" >> .env
-echo "FLARESOLVERR-UID=10007" >> .env
-echo "SONARR-UID=10008" >> .env
-echo "RADARR-UID=10009" >> .env
-echo "READARR-UID=10010" >> .env
-echo "LIDARR-UID=10011" >> .env
-echo "BAZARR-UID=10012" >> .env
-echo "LAZYLIBRARIAN-UID=10013" >> .env
-echo "FRESHRSS-UID=10014" >> .env
-echo "MEDIA-GID=10000" >> .env
+#echo "PROTON-UID=10001" >> .env
+#echo "QBIT-UID=10002" >> .env
+#echo "JELLYFIN-UID=10003" >> .env
+#echo "AUDIOBOOK-UID=10004" >> .env
+#echo "SEER-UID=10005" >> .env
+#echo "PROWLARR-UID=10006" >> .env
+#echo "FLARESOLVERR-UID=10007" >> .env
+#echo "SONARR-UID=10008" >> .env
+#echo "RADARR-UID=10009" >> .env
+#echo "READARR-UID=10010" >> .env
+#echo "LIDARR-UID=10011" >> .env
+#echo "BAZARR-UID=10012" >> .env
+#echo "LAZYLIBRARIAN-UID=10013" >> .env
+#echo "FRESHRSS-UID=10014" >> .env
+#echo "MEDIA-GID=10000" >> .env
 echo "TZ=Etc/UTC" >> .env
