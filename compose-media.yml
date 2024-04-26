@@ -74,6 +74,21 @@ services:
       - ${MOVIE}:/data/movies
     restart: 'unless-stopped'
 
+  # for listening to audio books
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    ports:
+      - 13378:80
+    volumes:
+      - ${BOOKS}:/audiobooks
+      - ${POD}:/podcasts
+      # The metadata directory can be stored anywhere on your computer
+      - ${DOCKER_BASE}/audiobookshelf/metadata:/metadata
+      # The config directory needs to be on the same physical machine
+      # you are running ABS on
+      - ${DOCKER_BASE}/audiobookshelf/config:/config
+    restart: unless-stopped
+
   # for media requests
   jellyseerr:
     image: fallenbagel/jellyseerr:latest
