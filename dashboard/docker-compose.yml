@@ -11,10 +11,10 @@ services:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
     environment:
-      PUID: ${PUID}
-      PGID: ${PGID}
+      PUID: ${HOMEPAGE-UID}
+      PGID: ${HOMEPAGE-GID}
     ports:
       - 3000:3000
     volumes:
-      - ${DOCKER_BASE}/homepage/config:/app/config # Make sure your local config directory exists
+      - ${BASE}/config/homepage-config:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
