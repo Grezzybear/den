@@ -22,7 +22,7 @@ services:
       - 6767:6767 # bazarr
       - 5299:5299 # lazylibrarian
     volumes:
-      - ${BASE}/proton-config:/gluetun
+      - ${BASE}/config/proton-config:/gluetun
     env_file:
       - .env.secret # holds the end point and keys
     environment:
