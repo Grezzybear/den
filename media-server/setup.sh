@@ -56,3 +56,19 @@ sudo chown -R freshrss:mediacenter config/freshrss-config
 # set our base env values
 echo "UID=$(id -u)" >> .env
 echo "BASE=$(pwd)" >> .env
+"PROTON-UID=13001" >> .env
+"QBIT-UID=13002" >> .env
+"JELLYFIN-UID=13003" >> .env
+"AUDIOBOOK-UID=13004" >> .env
+"SEET-UID=13005" >> .env
+"PROWLARR-UID=13006" >> .env
+"FLARESOLVERR-UID=13007" >> .env
+"SONARR-UID=13008" >> .env
+"RADARR-UID=13009" >> .env
+"READARR-UID=13010" >> .env
+"LIDARR-UID=13011" >> .env
+"BAZARR-UID=13012" >> .env
+"LAZYLIBRARIAN-UID=13013" >> .env
+"FRESHRSS-UID=13014" >> .env
+"MEDIA-GID=13000" >> .env
+"TZ=Etc/UTC" >> .env
