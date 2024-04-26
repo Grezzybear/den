@@ -271,5 +271,7 @@ services:
     
 networks:
   default:
+    name: media-network
+  nginx-network:
     external: true
     name: nginx-network
