@@ -5,6 +5,7 @@ services:
   proton:
     image: qmcgaw/gluetun
     container_name: proton
+    user: ${PROTON-UID}:${MEDIA-GID}
     cap_add:
       - NET_ADMIN
     devices:
@@ -24,11 +25,8 @@ services:
     volumes:
       - ${BASE}/config/proton-config:/gluetun
     env_file:
-      - .env
       - .env.secret # holds the end point and keys
     environment:
-      - PUID=${PROTON-UID}
-      - PGID=${MEDIA-GID}
       - VPN_SERVICE_PROVIDER=custom
       - VPN_TYPE=wireguard
       # Wireguard:
