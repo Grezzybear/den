@@ -24,6 +24,7 @@ services:
     volumes:
       - ${BASE}/config/proton-config:/gluetun
     env_file:
+      - .env
       - .env.secret # holds the end point and keys
     environment:
       - PUID=${PROTON-UID}
