@@ -1,7 +1,5 @@
 version: '3.3'
 
-# test
-
 services:
   # for protonvpn
   proton:
@@ -12,8 +10,8 @@ services:
     devices:
       - /dev/net/tun:/dev/net/tun
     ports:
-      - 6881:6881
-      - 6881:6881/udp
+      - 6881:6881 # qbittorrent
+      - 6881:6881/udp # qbittorrent
       - 8085:8085 # qbittorrent
       - 9696:9696 # prowlarr
       - 8191:8191 # flaresolverr
@@ -24,21 +22,20 @@ services:
       - 6767:6767 # bazarr
       - 5299:5299 # lazylibrarian
     volumes:
-      - ${DOCKER_BASE}/proton:/gluetun
+      - ${BASE}/proton-config:/gluetun
     env_file:
-      - .env.secret
+      - .env.secret # holds the end point and keys
     environment:
+      - PUID=${PROTON-UID}
+      - PGID=${MEDIA-GID}
       - VPN_SERVICE_PROVIDER=custom
       - VPN_TYPE=wireguard
       # Wireguard:
 #      - VPN_ENDPOINT_IP=/run/secrets/wg_endpoint
       - VPN_ENDPOINT_PORT=51820
-#      - WIREGUARD_CONF_SECRETFILE=/run/secrets/wg0.conf
-#      - WIREGUARD_PUBLIC_KEY=/run/secrets/wg_public_key
-#      - WIREGUARD_PRESHARED_KEY=
-#      - WIREGUARD_PRIVATE_KEY=/run/secrets/wg_private_key
       - WIREGUARD_ADDRESSES=10.2.0.2/32
-      - TZ=Etc/UTC
+      - TZ=${TZ}
+      - UMASK=002
       # Server list updater
       # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
       - UPDATER_PERIOD=24h
@@ -48,14 +45,15 @@ services:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
+      - PUID=${QBIT-UID}
+      - PGID=${MEDIA-GID}
       - TZ=${TZ}
+      - UMASK=002
       - WEBUI_PORT=8085
       - TORRENTING_PORT=6881
     volumes:
-      - ${DOCKER_BASE}/qbittorrent/config:/config
-      - ${DOWNLOADS}:/downloads
+      - ${BASE}/config/qbittorrent-config:/config
+      - ${BASE}/data/torrents:/data/torrents
     restart: unless-stopped
     depends_on: 
       - proton
@@ -65,42 +63,47 @@ services:
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
-    user: root
+    environment:
+      - PUID=${JELLYFIN-UID}
+      - PGID=${MEDIA-GID}
+      - UMASK=002
     ports: 
       - '8096:8096'
     volumes:
-      - ${DOCKER_BASE}/jellyfin/config:/config
-      - ${TV}:/data/tvshows
-      - ${MOVIE}:/data/movies
+      - ${BASE}/config/jellyfin-config:/config
+      - ${BASE}/data/media:/data
     restart: 'unless-stopped'
 
   # for listening to audio books
   audiobookshelf:
     image: ghcr.io/advplyr/audiobookshelf:latest
     container_name: audiobookshelf
+    user: ${AUDIOBOOK-UID}:${MEDIA-GID}
+    environment:
+      - TZ=${TZ}
+      - UMASK=002
     ports:
       - 13378:80
     volumes:
-      - ${BOOKS}:/audiobooks
-      - ${POD}:/podcasts
-      # The metadata directory can be stored anywhere on your computer
-      - ${DOCKER_BASE}/audiobookshelf/metadata:/metadata
-      # The config directory needs to be on the same physical machine
-      # you are running ABS on
-      - ${DOCKER_BASE}/audiobookshelf/config:/config
+      - ${BASE}/config/audiobookshelf-config:/config
+      - ${BASE}/data/media/audiobooks:/audiobooks
+      - ${BASE}/data/media/podcasts:/podcasts
+      - ${BASE}/data/media/audiobookshelf-metadata:/metadata
     restart: unless-stopped
 
   # for media requests
   jellyseerr:
     image: fallenbagel/jellyseerr:latest
     container_name: jellyseerr
+    user: ${SEER-UID}:${MEDIA-GID}
     environment:
         - LOG_LEVEL=debug
         - TZ=${TZ}
+        - UMASK=002
     ports:
         - 5055:5055
     volumes:
-        - ${DOCKER_BASE}/jellyseer/config:/app/config
+        - ${BASE}/config/jellyseer-config:/app/config
     restart: unless-stopped
 
   # for index management
@@ -108,11 +111,12 @@ services:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
+      - PUID=${PROWLARR-UID}
+      - PGID=${MEDIA-GID}
       - TZ=${TZ}
+      - UMASK=002
     volumes:
-      - ${DOCKER_BASE}/prowlarr/data:/config
+      - ${BASE}/config/prowlarr-config:/config
     restart: unless-stopped
     depends_on: 
       - proton
@@ -123,11 +127,13 @@ services:
     # DockerHub mirror flaresolverr/flaresolverr:latest
     image: ghcr.io/flaresolverr/flaresolverr:latest
     container_name: flaresolverr
+    user: ${FLARESOLVERR-UID}:${MEDIA-GID}
     environment:
       - LOG_LEVEL=${LOG_LEVEL:-info}
       - LOG_HTML=${LOG_HTML:-false}
       - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
       - TZ=${TZ}
+      - UMASK=002
     depends_on: 
       - proton
     network_mode: "service:proton"
@@ -138,13 +144,13 @@ services:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
+      - PUID=${SONARR-UID}
+      - PGID=${MEDIA-GID}
       - TZ=${TZ}
+      - UMASK=002
     volumes:
-      - ${DOCKER_BASE}/sonarr/config:/config
-      - ${TV}:/tv #optional
-      - ${DOWNLOADS}:/downloads #optional
+      - ${BASE}/config/sonarr-config:/config
+      - ${BASE}/data:/data
     restart: unless-stopped
     depends_on: 
       - proton
@@ -155,13 +161,13 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
+      - PUID=${RADARR-UID}
+      - PGID=${MEDIA-GID}
       - TZ=${TZ}
+      - UMASK=002
     volumes:
-      - ${DOCKER_BASE}/radarr/config:/config
-      - ${MOVIE}:/movies #optional
-      - ${DOWNLOADS}:/downloads #optional
+      - ${BASE}/config/radarr-config:/config
+      - ${BASE}/data:/data
     restart: unless-stopped
     depends_on: 
       - proton
@@ -172,13 +178,13 @@ services:
     image: lscr.io/linuxserver/readarr:develop
     container_name: readarr
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
+      - PUID=${READARR-UID}
+      - PGID=${MEDIA-GID}
       - TZ=${TZ}
+      - UMASK=002
     volumes:
-      - ${DOCKER_BASE}/readarr/config:/config
-      - ${BOOKS}:/books #optional
-      - ${DOWNLOADS}:/downloads #optional
+      - ${BASE}/config/readarr-config:/config
+      - ${BASE}/data:/data
     restart: unless-stopped
     depends_on: 
       - proton
@@ -189,13 +195,13 @@ services:
     image: lscr.io/linuxserver/lidarr:latest
     container_name: lidarr
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
+      - PUID=${LIDARR-UID}
+      - PGID=${LIDARR-GID}
       - TZ=${TZ}
+      - UMASK=002
     volumes:
-      - ${DOCKER_BASE}/lidarr/config:/config
-      - ${MUSIC}:/music #optional
-      - ${DOWNLOADS}:/downloads #optional
+      - ${BASE}/config/lidarr-config:/config
+      - ${BASE}/data:/data
     restart: unless-stopped
     depends_on: 
       - proton
@@ -206,13 +212,13 @@ services:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
+      - PUID=${BAZARR-UID}
+      - PGID=${MEDIA-GID}
       - TZ=${TZ}
+      - UMASK=002
     volumes:
-      - ${DOCKER_BASE}/bazarr/config:/config
-      - ${MOVIE}:/movies #optional
-      - ${TV}:/tv #optional
+      - ${BASE}/config/bazarr-config:/config
+      - ${BASE}/data:/data
     restart: unless-stopped
     depends_on: 
       - proton
@@ -223,14 +229,14 @@ services:
     image: lscr.io/linuxserver/lazylibrarian:latest
     container_name: lazylibrarian
     environment:
-      - PUID=${PUID}
-      - PGID=${PUID}
+      - PUID=${LAZYLIBRARIAN-UID}
+      - PGID=${MEDIA-GID}
       - TZ=${TZ}
+      - UMASK=002
       - DOCKER_MODS=linuxserver/mods:universal-calibre|linuxserver/mods:lazylibrarian-ffmpeg #optional
     volumes:
-      - ${DOCKER_BASE}/lazylibrarian/config:/config
-      - ${DOWNLOADS}:/downloads
-      - ${BOOKS}:/books #optional
+      - ${BASE}/config/lazylibrarian-config:/config
+      - ${BASE}/data:/data
     restart: unless-stopped
     depends_on: 
       - proton
@@ -241,11 +247,12 @@ services:
     image: lscr.io/linuxserver/freshrss:latest
     container_name: freshrss
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
+      - PUID=${FRESHRSS-UID}
+      - PGID=${MEDIA-GID}
       - TZ=${TZ}
+      - UMASK=002
     volumes:
-      - ${DOCKER_BASE}/freshrss/config:/config
+      - ${BASE}/config/freshrss-config:/config
     ports:
       - 8080:80
     restart: unless-stopped
