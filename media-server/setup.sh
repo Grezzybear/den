@@ -42,7 +42,7 @@ sudo chown -R proton:mediacenter config/proton-config
 sudo chown -R qbittorrent:mediacenter config/qbittorrent-config
 sudo chown -R jellyfin:mediacenter config/jellyfin-config
 sudo chown -R audiobookshelf:mediacenter config/audiobookshelf-config
-sudo chown -R jellyseer:mediacenter config/jellyseerr-config
+sudo chown -R jellyseerr:mediacenter config/jellyseerr-config
 sudo chown -R prowlarr:mediacenter config/prowlarr-config
 sudo chown -R flaresolverr:mediacenter config/flaresolverr-config
 sudo chown -R sonarr:mediacenter config/sonarr-config
