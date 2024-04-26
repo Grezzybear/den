@@ -77,6 +77,7 @@ services:
   # for listening to audio books
   audiobookshelf:
     image: ghcr.io/advplyr/audiobookshelf:latest
+    container_name: audiobookshelf
     ports:
       - 13378:80
     volumes:
