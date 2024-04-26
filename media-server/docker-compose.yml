@@ -28,10 +28,8 @@ services:
     environment:
       - VPN_SERVICE_PROVIDER=custom
       - VPN_TYPE=wireguard
-#      - PUID=${PROTON-UID}
-#      - PGID=${MEDIA-GID}
-      # Wireguard:
-#      - VPN_ENDPOINT_IP=/run/secrets/wg_endpoint
+      - PUID=10001
+      - PGID=10000
       - VPN_ENDPOINT_PORT=51820
       - WIREGUARD_ADDRESSES=10.2.0.2/32
       - TZ=${TZ}
@@ -45,8 +43,8 @@ services:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
     environment:
-      - PUID=${QBIT-UID}
-      - PGID=${MEDIA-GID}
+      - PUID=10002
+      - PGID=10000
       - TZ=${TZ}
       - UMASK=002
       - WEBUI_PORT=8085
@@ -64,8 +62,8 @@ services:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
     environment:
-      - PUID=${JELLYFIN-UID}
-      - PGID=${MEDIA-GID}
+      - PUID=10003
+      - PGID=10000
       - UMASK=002
     ports: 
       - '8096:8096'
@@ -81,8 +79,8 @@ services:
     environment:
       - TZ=${TZ}
       - UMASK=002
-      - PUID=${AUDIOBOOK-UID}
-      - PGID=${MEDIA-GID}
+      - PUID=10004
+      - PGID=10000
     ports:
       - 13378:80
     volumes:
@@ -100,8 +98,8 @@ services:
       - LOG_LEVEL=debug
       - TZ=${TZ}
       - UMASK=002
-      - PUID=${SEER-UID}
-      - PGID=${MEDIA-GID}
+      - PUID=10005
+      - PGID=10000
     ports:
       - 5055:5055
     volumes:
@@ -113,8 +111,8 @@ services:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
     environment:
-      - PUID=${PROWLARR-UID}
-      - PGID=${MEDIA-GID}
+      - PUID=10006
+      - PGID=10000
       - TZ=${TZ}
       - UMASK=002
     volumes:
@@ -134,8 +132,8 @@ services:
       - LOG_LEVEL=${LOG_LEVEL:-info}
       - LOG_HTML=${LOG_HTML:-false}
       - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
-      - PUID=${FLARESOLVERR-UID}
-      - PGID=${MEDIA-GID}
+      - PUID=10007
+      - PGID=10000
       - TZ=${TZ}
       - UMASK=002
     depends_on: 
@@ -148,8 +146,8 @@ services:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
     environment:
-      - PUID=${SONARR-UID}
-      - PGID=${MEDIA-GID}
+      - PUID=10008
+      - PGID=10000
       - TZ=${TZ}
       - UMASK=002
     volumes:
@@ -165,8 +163,8 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     environment:
-      - PUID=${RADARR-UID}
-      - PGID=${MEDIA-GID}
+      - PUID=10009
+      - PGID=10000
       - TZ=${TZ}
       - UMASK=002
     volumes:
@@ -182,8 +180,8 @@ services:
     image: lscr.io/linuxserver/readarr:develop
     container_name: readarr
     environment:
-      - PUID=${READARR-UID}
-      - PGID=${MEDIA-GID}
+      - PUID=10010
+      - PGID=10000
       - TZ=${TZ}
       - UMASK=002
     volumes:
@@ -199,8 +197,8 @@ services:
     image: lscr.io/linuxserver/lidarr:latest
     container_name: lidarr
     environment:
-      - PUID=${LIDARR-UID}
-      - PGID=${LIDARR-GID}
+      - PUID=10011
+      - PGID=10000
       - TZ=${TZ}
       - UMASK=002
     volumes:
@@ -216,8 +214,8 @@ services:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
     environment:
-      - PUID=${BAZARR-UID}
-      - PGID=${MEDIA-GID}
+      - PUID=10012
+      - PGID=10000
       - TZ=${TZ}
       - UMASK=002
     volumes:
@@ -233,8 +231,8 @@ services:
     image: lscr.io/linuxserver/lazylibrarian:latest
     container_name: lazylibrarian
     environment:
-      - PUID=${LAZYLIBRARIAN-UID}
-      - PGID=${MEDIA-GID}
+      - PUID=10013
+      - PGID=10000
       - TZ=${TZ}
       - UMASK=002
       - DOCKER_MODS=linuxserver/mods:universal-calibre|linuxserver/mods:lazylibrarian-ffmpeg #optional
@@ -251,8 +249,8 @@ services:
     image: lscr.io/linuxserver/freshrss:latest
     container_name: freshrss
     environment:
-      - PUID=${FRESHRSS-UID}
-      - PGID=${MEDIA-GID}
+      - PUID=10014
+      - PGID=10000
       - TZ=${TZ}
       - UMASK=002
     volumes:
