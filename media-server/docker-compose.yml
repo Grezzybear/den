@@ -29,6 +29,8 @@ services:
     environment:
       - VPN_SERVICE_PROVIDER=custom
       - VPN_TYPE=wireguard
+      - PUID=${PROTON-UID}
+      - PGID=${MEDIA-GID}
       # Wireguard:
 #      - VPN_ENDPOINT_IP=/run/secrets/wg_endpoint
       - VPN_ENDPOINT_PORT=51820
@@ -81,6 +83,8 @@ services:
     environment:
       - TZ=${TZ}
       - UMASK=002
+      - PUID=${AUDIOBOOK-UID}
+      - PGID=${MEDIA-GID}
     ports:
       - 13378:80
     volumes:
@@ -96,13 +100,15 @@ services:
     container_name: jellyseerr
     user: ${SEER-UID}:${MEDIA-GID}
     environment:
-        - LOG_LEVEL=debug
-        - TZ=${TZ}
-        - UMASK=002
+      - LOG_LEVEL=debug
+      - TZ=${TZ}
+      - UMASK=002
+      - PUID=${SEER-UID}
+      - PGID=${MEDIA-GID}
     ports:
-        - 5055:5055
+      - 5055:5055
     volumes:
-        - ${BASE}/config/jellyseer-config:/app/config
+      - ${BASE}/config/jellyseerr-config:/app/config
     restart: unless-stopped
 
   # for index management
