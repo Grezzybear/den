@@ -6,20 +6,7 @@
 version: '3.3'
 
 services:
-  nginxproxymanager:
-    image: 'jc21/nginx-proxy-manager:latest'
-    container_name: nginxproxymanager
-    restart: unless-stopped
-    ports:
-      - '80:80'
-      - '81:81'
-      - '443:443'
-    networks:
-      - default
-      - nginx-network
-    volumes:
-      - ${DOCKER_BASE}/nginx/data:/data
-      - ${DOCKER_BASE}/nginx/letsencrypt:/etc/letsencrypt
+  # for connecting to vps front end
   wireguard:
     image: lscr.io/linuxserver/wireguard:latest
     container_name: wireguard
@@ -27,8 +14,8 @@ services:
       - NET_ADMIN
 #      - SYS_MODULE #optional
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
+      - PUID=11001
+      - PGID=11000
       - TZ=${TZ}
 #      - SERVERURL=wireguard.domain.com #optional
 #      - SERVERPORT=51820 #optional
@@ -38,7 +25,7 @@ services:
 #      - PERSISTENTKEEPALIVE_PEERS= #optional
 #      - LOG_CONFS=true #optional
     volumes:
-      - ${DOCKER_BASE}/wireguard/config:/config
+      - ${BASE}/wireguard/config:/config
 #      - /lib/modules:/lib/modules #optional
     ports:
       - 51820:51820/udp
@@ -48,9 +35,25 @@ services:
       - net.ipv4.conf.all.src_valid_mark=1
     restart: unless-stopped
 
+  # for routing traffic to our containers
+  nginxproxymanager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nginxproxymanager
+    user: 11002:11000
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    networks:
+      - default
+      - nginx-network
+    volumes:
+      - ${BASE}/nginx/data:/data
+      - ${BASE}/nginx/letsencrypt:/etc/letsencrypt
+    restart: unless-stopped
+
 networks:
   default:
-    external: true
-    name: vpn-traffic
+    name: incoming-traffic
   nginx-network:
     external: true
