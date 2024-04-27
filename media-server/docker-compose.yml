@@ -269,6 +269,22 @@ services:
       - 8080:80
     restart: unless-stopped
 
+  # for music streaming
+  navidrome:
+    image: deluan/navidrome:latest
+    ports:
+      - "4533:4533"
+    environment:
+      ND_SCANSCHEDULE: 1h
+      ND_LOGLEVEL: info  
+      ND_BASEURL: ""
+    volumes:
+      - "${BASE}/config/navidrome-config:/data"
+      - "${BASE}/data/media/music:/music:ro"
+    networks:
+      - nginx-network
+    restart: unless-stopped
+
 networks:
   default:
     name: media-network
