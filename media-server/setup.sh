@@ -15,6 +15,7 @@ sudo useradd lidarr -u 10011
 sudo useradd bazarr -u 10012
 sudo useradd lazylibrarian -u 10013
 sudo useradd freshrss -u 10014
+sudo useradd navidrome -u 10015
 sudo groupadd mediacenter -g 10000
 sudo usermod -a -G mediacenter proton
 sudo usermod -a -G mediacenter qbittorrent
@@ -30,9 +31,10 @@ sudo usermod -a -G mediacenter lidarr
 sudo usermod -a -G mediacenter bazarr
 sudo usermod -a -G mediacenter lazylibrarian
 sudo usermod -a -G mediacenter freshrss
+sudo usermod -a -G mediacenter navidrome
 
 # Make directories
-sudo mkdir -pv config/{proton,qbittorrent,jellyfin,audiobookshelf,jellyseerr,prowlarr,flaresolverr,sonarr,radarr,readarr,lidarr,bazarr,lazylibrarian,freshrss}-config
+sudo mkdir -pv config/{proton,qbittorrent,jellyfin,audiobookshelf,jellyseerr,prowlarr,flaresolverr,sonarr,radarr,readarr,lidarr,bazarr,lazylibrarian,freshrss,navidrome}-config
 sudo mkdir -pv data/{torrents,usenet,media}/{tv,movies,music,books,comics,audiobooks,podcasts,audiobookshelf-metadata}
 
 # Set permissions
@@ -52,6 +54,7 @@ sudo chown -R lidarr:mediacenter config/lidarr-config
 sudo chown -R bazarr:mediacenter config/bazarr-config
 sudo chown -R lazylibrarian:mediacenter config/lazylibrarian-config
 sudo chown -R freshrss:mediacenter config/freshrss-config
+sudo chown -R navidrome:mediacenter config/navidrome-config
 
 # set our base env values
 #echo "UID=$(id -u)" >> .env
@@ -70,5 +73,6 @@ echo "BASE=$(pwd)" >> .env
 #echo "BAZARR-UID=10012" >> .env
 #echo "LAZYLIBRARIAN-UID=10013" >> .env
 #echo "FRESHRSS-UID=10014" >> .env
+#echo "NAVIDROME-UID=10015" >> .env
 #echo "MEDIA-GID=10000" >> .env
 echo "TZ=Etc/UTC" >> .env
