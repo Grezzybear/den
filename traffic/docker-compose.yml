@@ -13,6 +13,10 @@ services:
     cap_add:
       - NET_ADMIN
 #      - SYS_MODULE #optional
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
     environment:
       - PUID=11001
       - PGID=11000
@@ -39,10 +43,6 @@ services:
   nginxproxymanager:
     image: 'jc21/nginx-proxy-manager:latest'
     container_name: nginxproxymanager
-    ports:
-      - '80:80'
-      - '81:81'
-      - '443:443'
     networks:
       - default
       - nginx-network
@@ -52,6 +52,9 @@ services:
     volumes:
       - ${BASE}/nginx/data:/data
       - ${BASE}/nginx/letsencrypt:/etc/letsencrypt
+    depends_on: 
+      - wireguard
+    network_mode: "service:wireguard"
     restart: unless-stopped
 
 networks:
