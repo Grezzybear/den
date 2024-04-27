@@ -39,7 +39,6 @@ services:
   nginxproxymanager:
     image: 'jc21/nginx-proxy-manager:latest'
     container_name: nginxproxymanager
-    user: 11002:11000
     ports:
       - '80:80'
       - '81:81'
@@ -47,6 +46,9 @@ services:
     networks:
       - default
       - nginx-network
+    environment:
+      - PUID=11002
+      - PGID=11000
     volumes:
       - ${BASE}/nginx/data:/data
       - ${BASE}/nginx/letsencrypt:/etc/letsencrypt
