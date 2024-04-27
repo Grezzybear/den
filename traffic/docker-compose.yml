@@ -35,6 +35,7 @@ services:
       - 51820:51820/udp
     networks:
       - default
+      - nginx-network
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
     restart: unless-stopped
@@ -43,9 +44,6 @@ services:
   nginxproxymanager:
     image: 'jc21/nginx-proxy-manager:latest'
     container_name: nginxproxymanager
-    networks:
-      - default
-      - nginx-network
     environment:
       - PUID=11002
       - PGID=11000
