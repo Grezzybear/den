@@ -19,3 +19,4 @@ Eventually once i had something kinda working I ended up finding [EZARR](https:/
 - Bazarr
 - Lazylibrarian
 - Freshrss
+- Navidrome
