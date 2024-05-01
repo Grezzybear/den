@@ -14,22 +14,26 @@ Eventually once i had something kinda working I ended up finding [EZARR](https:/
 Another great repo that helped me along was [Cloud-Reverse-Proxy](https://github.com/N-Quan/Cloud-Reverse-Proxy) from [N-Quan](https://github.com/N-Quan). I was having many issues finding out the correct iptables rules for forwarding traffic from a cloud VPS through wireguard, so this knowledge was invaluable. 
 
 ## Media-Server
-- Gluetun
-- Qbittorrent
-- Jellyfin
-- Audiobookshelf
-- Jellyseer
-- Prowlarr
-- Flaresolverr
-- Sonarr
-- Radarr
-- Readarr
-- Lidarr
-- Bazarr
-- Lazylibrarian
-- Freshrss
-- Navidrome
+| App | Use | Notes |
+| --- | --- | --- |
+| Gluetun | VPN network connection | |
+| QBitTorrent| Torrenting | The best [WebUI replacement](https://github.com/VueTorrent/VueTorrent?tab=readme-ov-file) I have found |
+| Jellyfin | Media viewing | |
+| Audiobookshelf | Audiobook streaming | |
+| Jellyseerr | Media request service | |
+| Prowlarr | Index management | |
+| Flaresolverr | Security bypass | |
+| Sonarr | TV Downloads | |
+| Radarr | Movie Downloads | |
+| Readarr | Book Downloads | |
+| Lidarr | Music Downloads | |
+| Bazarr | Subtitle Downloads | |
+| LazyLibrarian | Book metadata lookup | |
+| FreshRSS | RSS Feed organizer | |
+| Navidrome | Music Streaming App | |
 
 ## Traffic-Control
-- Wireguard
-- NginxProxyManager
+| App | Use | Notes |
+| --- | --- | --- |
+| Wireguard | VPS tunnel connection | |
+| WNginxProxyManager | Reverse Proxy and SSL | |
