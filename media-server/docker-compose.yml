@@ -73,6 +73,7 @@ services:
       - ${BASE}/config/jellyfin-config:/config
       - ${BASE}/data/media:/data
     networks:
+      - default
       - nginx-network
     restart: 'unless-stopped'
 
@@ -94,6 +95,7 @@ services:
       - ${BASE}/data/media/podcasts:/podcasts
       - ${BASE}/data/media/audiobookshelf-metadata:/metadata
     networks:
+      - default
       - nginx-network
     restart: unless-stopped
 
@@ -113,6 +115,7 @@ services:
     volumes:
       - ${BASE}/config/jellyseerr-config:/app/config
     networks:
+      - default
       - nginx-network
     restart: unless-stopped
 
@@ -284,6 +287,7 @@ services:
       - "${BASE}/config/navidrome-config:/data"
       - "${BASE}/data/media/music:/music:ro"
     networks:
+      - default
       - nginx-network
     restart: unless-stopped
 
