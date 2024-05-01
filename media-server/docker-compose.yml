@@ -24,7 +24,7 @@ services:
     volumes:
       - ${BASE}/config/proton-config:/gluetun
     networks:
-      - default
+      - media-network
     env_file:
       - .env.secret # holds the end point and keys
     environment:
@@ -73,7 +73,7 @@ services:
       - ${BASE}/config/jellyfin-config:/config
       - ${BASE}/data/media:/data
     networks:
-      - default
+      - media-network
       - nginx-network
     restart: 'unless-stopped'
 
@@ -95,7 +95,7 @@ services:
       - ${BASE}/data/media/podcasts:/podcasts
       - ${BASE}/data/media/audiobookshelf-metadata:/metadata
     networks:
-      - default
+      - media-network
       - nginx-network
     restart: unless-stopped
 
@@ -115,7 +115,7 @@ services:
     volumes:
       - ${BASE}/config/jellyseerr-config:/app/config
     networks:
-      - default
+      - media-network
       - nginx-network
     restart: unless-stopped
 
@@ -287,13 +287,15 @@ services:
       - "${BASE}/config/navidrome-config:/data"
       - "${BASE}/data/media/music:/music:ro"
     networks:
-      - default
+      - media-network
       - nginx-network
     restart: unless-stopped
 
 networks:
   default:
-    name: media-network
   nginx-network:
     external: true
     name: nginx-network
+  media-network:
+    external: true
+    name: media-network
