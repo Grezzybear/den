@@ -7,6 +7,7 @@ sudo usermod -a -G dashboard homepage
 
 # Make directories
 sudo mkdir -pv config/homepage-config
+sudo mkdir -pv images/
 
 # Set permissions
 sudo chown -R homepage:dashboard config/homepage-config
