@@ -13,9 +13,16 @@ services:
     environment:
       PUID: 12001
       PGID: 12000
+    network:
+      - homepage-network
     ports:
       - 3000:3000
     volumes:
       - ${BASE}/config/homepage-config:/app/config # Make sure your local config directory exists
       - ${BASE}/images:/app/public/images
       - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
+networks:
+  default:
+  homepage-network:
+    external: true
+    name: homepage-network
