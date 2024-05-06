@@ -13,7 +13,7 @@ services:
     environment:
       PUID: 12001
       PGID: 12000
-    network:
+    networks:
       - homepage-network
     ports:
       - 3000:3000
