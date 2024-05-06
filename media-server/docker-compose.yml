@@ -28,6 +28,7 @@ services:
     env_file:
       - .env.secret # holds the end point and keys
     environment:
+      - DNS_ADDRESS=127.0.0.11 # necessary as this is dockers dns address and by default it will set to 127.0.0.1 which wont resolve container names
       - VPN_SERVICE_PROVIDER=custom
       - VPN_TYPE=wireguard
       - PUID=10001
