@@ -17,4 +17,5 @@ services:
       - 3000:3000
     volumes:
       - ${BASE}/config/homepage-config:/app/config # Make sure your local config directory exists
+      - ${BASE}/images:/app/public/images
       - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
