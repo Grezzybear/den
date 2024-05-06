@@ -11,8 +11,8 @@ services:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
     environment:
-      PUID: ${HOMEPAGE-UID}
-      PGID: ${HOMEPAGE-GID}
+      PUID: 12001
+      PGID: 12000
     ports:
       - 3000:3000
     volumes:
