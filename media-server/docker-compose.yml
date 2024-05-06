@@ -25,6 +25,7 @@ services:
       - ${BASE}/config/proton-config:/gluetun
     networks:
       - media-network
+      - homepage-network
     env_file:
       - .env.secret # holds the end point and keys
     environment:
@@ -76,6 +77,7 @@ services:
     networks:
       - media-network
       - nginx-network
+      - homepage-network
     restart: 'unless-stopped'
 
   # for listening to audio books
@@ -98,6 +100,7 @@ services:
     networks:
       - media-network
       - nginx-network
+      - homepage-network
     restart: unless-stopped
 
   # for media requests
@@ -118,6 +121,7 @@ services:
     networks:
       - media-network
       - nginx-network
+      - homepage-network
     restart: unless-stopped
 
   # for index management
@@ -290,6 +294,7 @@ services:
     networks:
       - media-network
       - nginx-network
+      - homepage-network
     restart: unless-stopped
 
 networks:
@@ -300,3 +305,6 @@ networks:
   media-network:
     external: true
     name: media-network
+  homepage-network:
+    external: true
+    name: homepage-network
