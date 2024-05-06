@@ -14,9 +14,9 @@ services:
       - NET_ADMIN
 #      - SYS_MODULE #optional
     ports:
-      #- '80:80'
+      - '80:80'
       - '81:81'
-      #- '443:443'
+      - '443:443'
     environment:
       - PUID=11001
       - PGID=11000
