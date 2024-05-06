@@ -76,3 +76,9 @@ echo "BASE=$(pwd)" >> .env
 #echo "NAVIDROME-UID=10015" >> .env
 #echo "MEDIA-GID=10000" >> .env
 echo "TZ=Etc/UTC" >> .env
+
+# setup our secret env file
+echo "# these are the wireguard/gluetun variables to connect to protonvpn" >> .env.secret
+echo "VPN_ENDPOINT_IP=" >> .env.secret
+echo "WIREGUARD_PUBLIC_KEY=" >> .env.secret
+echo "WIREGUARD_PRIVATE_KEY=" >> .env.secret
