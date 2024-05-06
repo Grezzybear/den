@@ -14,9 +14,10 @@ services:
       - NET_ADMIN
 #      - SYS_MODULE #optional
     ports:
-      - '80:80'
-      - '81:81'
-      - '443:443'
+      - 80:80
+      - 81:81
+      - 443:443
+      - 51820:51820/udp
     environment:
       - PUID=11001
       - PGID=11000
@@ -31,8 +32,6 @@ services:
     volumes:
       - ${BASE}/wireguard/config:/config
 #      - /lib/modules:/lib/modules #optional
-    ports:
-      - 51820:51820/udp
     networks:
       - nginx-network
     sysctls:
