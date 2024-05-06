@@ -6,7 +6,7 @@ sudo groupadd dashboard -g 12000
 sudo usermod -a -G dashboard homepage
 
 # Make directories
-sudo mkdir -pv config/{homepage}-config
+sudo mkdir -pv config/homepage-config
 
 # Set permissions
 sudo chown -R homepage:dashboard config/homepage-config
