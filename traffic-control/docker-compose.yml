@@ -34,7 +34,6 @@ services:
     ports:
       - 51820:51820/udp
     networks:
-      - default
       - nginx-network
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
