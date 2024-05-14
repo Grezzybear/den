@@ -3,9 +3,9 @@
 version: '3.3'
 
 services:
-  db:
+  wikipersonaldb:
     image: postgres:16
-    container_name: wiki-personal-db
+    container_name: wikipersonaldb
     user: 13002:13000
     restart: unless-stopped
     networks:
@@ -15,9 +15,9 @@ services:
     volumes:
       - ./postgresql:/var/lib/postgresql/data
 
-  wiki-personal:
+  wikipersonal:
     image: ghcr.io/requarks/wiki:2.5
-    container_name: wiki-personal
+    container_name: wikipersonal
     user: 13001:13000
     env_file:
       - .env
