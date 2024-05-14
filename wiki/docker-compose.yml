@@ -7,9 +7,9 @@ services:
     image: postgres:16
     container_name: wiki-personal-db
     user: 13002:13000
-    logging:
-      driver: "none"
     restart: unless-stopped
+    env_file:
+      - .env  
     volumes:
       - ./config/personal-wiki-config:/var/lib/postgresql/data
 
@@ -17,6 +17,8 @@ services:
     image: ghcr.io/requarks/wiki:2.5
     container_name: wiki-personal
     user: 13001:13000
+    env_file:
+      - .env
     networks:
       - nginx-network
       - homepage-network
