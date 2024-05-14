@@ -13,6 +13,13 @@ Eventually once i had something kinda working I ended up finding [EZARR](https:/
 
 Another great repo that helped me along was [Cloud-Reverse-Proxy](https://github.com/N-Quan/Cloud-Reverse-Proxy) from [N-Quan](https://github.com/N-Quan). I was having many issues finding out the correct iptables rules for forwarding traffic from a cloud VPS through wireguard, so this knowledge was invaluable. 
 
+### User and Group Ids
+Individual users/groups are set up for different services
+Media-Server has users/groups that are 10000 based
+Anything that deals with network traffic like traffic-control and pihole are 11000 based
+Dashboard user/groups are 12000 based
+
+
 ## Media-Server
 | App | Use | Notes |
 | --- | --- | --- |
