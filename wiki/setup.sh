@@ -19,7 +19,7 @@ sudo chown -R personal-wiki:wiki data
 echo "BASE=$(pwd)" >> .env
 echo "TZ=Etc/UTC" >> .env
 echo "DB_TYPE=postgres" >> .env
-echo "DB_HOST=wiki-personal-db" >> .env
+echo "DB_HOST=wikipersonaldb" >> .env
 echo "DB_PORT=\"5432\"" >> .env
 
 echo "Enter Wiki Admin Email:"
