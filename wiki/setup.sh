@@ -9,11 +9,11 @@ sudo usermod -a -G wiki personal-wiki-db
 
 # Make directories
 sudo mkdir -pv postgresql
-sudo mkdir -pv data/wiki
+sudo mkdir -pv data
 
 # Set permissions
 sudo chown -R personal-wiki-db:wiki postgresql
-sudo chown -R personal-wiki:wiki data/wiki
+sudo chown -R personal-wiki:wiki data
 
 # set our base env values
 echo "BASE=$(pwd)" >> .env
