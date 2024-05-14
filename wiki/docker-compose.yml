@@ -26,7 +26,7 @@ services:
       - nginx-network
       - homepage-network
     volumes:
-      - ./config/personal-wiki-config/data:/wiki/data/cache
+      - ./config/personal-wiki-config/data:/wiki/data
     depends_on:
       - db
     restart: unless-stopped
