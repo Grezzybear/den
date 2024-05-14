@@ -5,6 +5,7 @@ version: '3.3'
 services:
   db:
     image: postgres:16
+    container_name: wiki-personal-db
     user: 13002:13000
     logging:
       driver: "none"
@@ -14,6 +15,7 @@ services:
 
   wiki-personal:
     image: ghcr.io/requarks/wiki:2.5
+    container_name: wiki-personal
     user: 13001:13000
     networks:
       - nginx-network
