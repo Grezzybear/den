@@ -17,6 +17,7 @@ sudo chown -R personal-wiki-db:wiki config/personal-wiki-config
 echo "BASE=$(pwd)" >> .env
 echo "TZ=Etc/UTC" >> .env
 echo "DB_TYPE=postgres" >> .env
+echo "DB_HOST=wiki-personal-db" >> .env
 
 echo "Enter Wiki Admin Email:"
 read -r ADMIN_EMAIL
