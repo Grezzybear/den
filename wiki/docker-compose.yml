@@ -23,7 +23,7 @@ services:
       - .env
     networks:
       - wiki-personal-network
-      - nginx-network
+      - nginx-personalwiki
       - homepage-network
     volumes:
       - ${BASE}/data:/wiki/data
@@ -36,9 +36,9 @@ services:
 networks:
   wiki-personal-network:
     name: wiki-personal-network
-  nginx-network:
+  nginx-personalwiki:
     external: true
-    name: nginx-network
+    name: nginx-personalwiki
   homepage-network:
     external: true
     name: homepage-network
