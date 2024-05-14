@@ -9,9 +9,11 @@ sudo usermod -a -G wiki personal-wiki-db
 
 # Make directories
 sudo mkdir -pv config/personal-wiki-config
+sudo mkdir -pv config/personal-wiki-config/data
 
 # Set permissions
 sudo chown -R personal-wiki-db:wiki config/personal-wiki-config
+sudo chown -R personal-wiki:wiki config/personal-wiki-config/data
 
 # set our base env values
 echo "BASE=$(pwd)" >> .env
