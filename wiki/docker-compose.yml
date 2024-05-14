@@ -5,30 +5,33 @@ version: '3.3'
 services:
   db:
     image: postgres:16
-    environment:
-      POSTGRES_DB: wiki
-      POSTGRES_PASSWORD: wikijsrocks
-      POSTGRES_USER: wikijs
+    user: 13002:13000
+    network:
+      - default
     logging:
       driver: "none"
     restart: unless-stopped
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - ./config/personal-wiki-config:/var/lib/postgresql/data
 
-  wiki:
+  wiki-personal:
     image: ghcr.io/requarks/wiki:3
+    user: 13001:13000
+    networks:
+      - default
+      - nginx-network
+      - homepage-network
     depends_on:
       - db
-    environment:
-      ADMIN_EMAIL: user@example.com
-      ADMIN_PASS: SuperSecret123
-      DB_HOST: db
-      DB_USER: wikijs
-      DB_PASS: wikijsrocks
-      DB_NAME: wiki
     restart: unless-stopped
     ports:
-      - "80:3000"
+      - "${PORT}:3000"
 
-volumes:
-  db-data:
+networks:
+  default:
+  nginx-network:
+    external: true
+    name: nginx-network
+  homepage-network:
+    external: true
+    name: homepage-network
