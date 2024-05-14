@@ -16,7 +16,7 @@ services:
       - ${BASE}/postgresql:/var/lib/postgresql/data
 
   wikipersonal:
-    image: ghcr.io/requarks/wiki:2.5
+    image: ghcr.io/requarks/wiki:2
     container_name: wikipersonal
     user: 13001:13000
     env_file:
