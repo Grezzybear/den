@@ -34,6 +34,7 @@ services:
 #      - /lib/modules:/lib/modules #optional
     networks:
       - nginx-network
+      - nginx-personalwiki
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
     restart: unless-stopped
@@ -57,4 +58,6 @@ networks:
   default:
     name: incoming-traffic
   nginx-network:
+    external: true
+  nginx-personalwiki:
     external: true
