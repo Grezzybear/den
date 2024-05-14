@@ -8,11 +8,11 @@ sudo usermod -a -G wiki personal-wiki
 sudo usermod -a -G wiki personal-wiki-db
 
 # Make directories
-sudo mkdir -pv data/postgresql
+sudo mkdir -pv postgresql
 sudo mkdir -pv data/wiki
 
 # Set permissions
-sudo chown -R personal-wiki-db:wiki data/postgresql
+sudo chown -R personal-wiki-db:wiki postgresql
 sudo chown -R personal-wiki:wiki data/wiki
 
 # set our base env values
