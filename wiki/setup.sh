@@ -4,8 +4,8 @@
 sudo useradd personal-wiki -u 13001
 sudo useradd personal-wiki-db -u 13002
 sudo groupadd wiki -g 13000
-sudo usermod -a -G personal-wiki wiki
-sudo usermod -a -G personal-wiki-db wiki
+sudo usermod -a -G wiki personal-wiki
+sudo usermod -a -G wiki personal-wiki-db
 
 # Make directories
 sudo mkdir -pv config/personal-wiki-config
