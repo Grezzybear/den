@@ -13,7 +13,7 @@ services:
     env_file:
       - .env  
     volumes:
-      - ./postgresql:/var/lib/postgresql/data
+      - ${BASE}/postgresql:/var/lib/postgresql/data
 
   wikipersonal:
     image: ghcr.io/requarks/wiki:2.5
@@ -26,7 +26,7 @@ services:
       - nginx-network
       - homepage-network
     volumes:
-      - ./data:/wiki/data
+      - ${BASE}/data:/wiki/data
     depends_on:
       - wikipersonaldb
     restart: unless-stopped
@@ -34,7 +34,6 @@ services:
       - "${PORT}:3000"
 
 networks:
-  default:
   wiki-personal-network:
     name: wiki-personal-network
   nginx-network:
