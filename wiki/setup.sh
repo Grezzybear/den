@@ -18,6 +18,7 @@ echo "BASE=$(pwd)" >> .env
 echo "TZ=Etc/UTC" >> .env
 echo "DB_TYPE=postgres" >> .env
 echo "DB_HOST=wiki-personal-db" >> .env
+echo "DB_PORT=\"5432\"" >> .env
 
 echo "Enter Wiki Admin Email:"
 read -r ADMIN_EMAIL
@@ -27,7 +28,7 @@ read -r ADMIN_PASS
 echo "ADMIN_PASS=$ADMIN_PASS" >> .env
 echo "Enter Wiki Port:"
 read -r PORT
-echo "PORT=$PORT" >> .env
+echo "PORT=\"$PORT\"" >> .env
 echo "Enter Database User:"
 read -r DB_USER
 echo "DB_USER=$DB_USER" >> .env
