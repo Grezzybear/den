@@ -6,8 +6,6 @@ services:
   db:
     image: postgres:16
     user: 13002:13000
-    network:
-      - default
     logging:
       driver: "none"
     restart: unless-stopped
@@ -18,7 +16,6 @@ services:
     image: ghcr.io/requarks/wiki:3
     user: 13001:13000
     networks:
-      - default
       - nginx-network
       - homepage-network
     depends_on:
