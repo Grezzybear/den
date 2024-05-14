@@ -13,7 +13,7 @@ services:
       - ./config/personal-wiki-config:/var/lib/postgresql/data
 
   wiki-personal:
-    image: ghcr.io/requarks/wiki:3
+    image: ghcr.io/requarks/wiki:2.5
     user: 13001:13000
     networks:
       - nginx-network
