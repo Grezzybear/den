@@ -28,7 +28,7 @@ services:
     volumes:
       - ./data:/wiki/data
     depends_on:
-      - db
+      - wikipersonaldb
     restart: unless-stopped
     ports:
       - "${PORT}:3000"
