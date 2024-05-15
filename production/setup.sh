@@ -29,13 +29,13 @@ echo "Enter Nextcloud Admin User:"
 read -r NEXTCLOUD_USER
 echo "$NEXTCLOUD_USER" >> secrets/nextcloud_admin_user.txt
 echo "Enter Nextcloud Admin Password:"
-read -r NEXTCLOUD_PASS
+read -rs NEXTCLOUD_PASS
 echo "$NEXTCLOUD_PASS" >> secrets/nextcloud_admin_password.txt
 echo "Enter Postgres DB User:"
 read -r PG_DB_USER
 echo "$PG_DB_USER" >> secrets/postgres_user.txt
 echo "Enter Postgres DB Password:"
-read -r PG_DB_PASS
+read -rs PG_DB_PASS
 echo "$PG_DB_PASS" >> secrets/postgres_password.txt
 echo "Enter Postgres DB Name:"
 read -r PG_DB
