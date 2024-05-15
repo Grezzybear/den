@@ -1,25 +1,21 @@
 #!/bin/bash
 
 # Make users and group
-sudo useradd prod-wiki -u 14001
-sudo useradd prod-wiki-db -u 14002
-sudo useradd nextcloud -u 14003
-sudo useradd nextcloud-db -u 14004
+sudo useradd nextcloud -u 14001
+sudo useradd nextcloud-db -u 14002
 sudo groupadd production -g 14000
-sudo usermod -a -G production prod-wiki
-sudo usermod -a -G production prod-wiki-db
 sudo usermod -a -G production nextcloud
 sudo usermod -a -G production nextcloud-db
 
 # Make directories
 sudo mkdir -p secrets
-sudo mkdir -pv nextcloud/html
-sudo mkdir -pv nextcloud/postgresql
+sudo mkdir -pv html
+sudo mkdir -pv postgresql
 
 # Set permissions
-sudo chown -R $(id -un):production secrets/
-sudo chown -R nextcloud-db:production nextcloud/postgresql
-sudo chown -R nextcloud:production nextcloud/html
+sudo chown -R $(id -un):production secrets
+sudo chown -R nextcloud:production html
+sudo chown -R nextcloud-db:production postgresql
 
 # set our base env values
 echo "BASE=$(pwd)" >> .env
