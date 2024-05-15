@@ -4,7 +4,7 @@ services:
   nextclouddb:
     image: postgres:16
     container_name: nextclouddb
-    user: 14004:14000
+    user: 14002:14000
     restart: unless-stopped
     networks:
       - nextcloud-network
@@ -23,7 +23,7 @@ services:
       
   nextcloud:
     image: lscr.io/linuxserver/nextcloud:latest
-    user: 14003:14000
+    user: 14001:14000
     restart: always
     ports:
       - 8080:80
