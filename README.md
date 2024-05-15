@@ -15,10 +15,16 @@ Another great repo that helped me along was [Cloud-Reverse-Proxy](https://github
 
 ### User and Group Ids
 Individual users/groups are set up for different services
-Media-Server has users/groups that are 10000 based
-Anything that deals with network traffic like traffic-control and pihole are 11000 based
-Dashboard user/groups are 12000 based
 
+10000 - Media-Server things
+
+11000 - Anything that deals with network traffic like traffic-control and pihole
+
+12000 - Dashboard user/groups
+
+13000 - Personal wikis
+
+14000 - All production based containers
 
 ## Media-Server
 | App | Use | Notes |
