@@ -54,7 +54,7 @@ Individual users/groups are set up for different services
 ## Wiki
 | App | Use | Notes |
 | --- | --- | --- |
-| Wiki.js | Base Config for a Wiki.js container, can easily be duplicated | |
+| Wiki.js | Digital notebook |  Base Config for a Wiki.js container, can easily be duplicated |
 
 ## Production
 | App | Use | Notes |
