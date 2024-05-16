@@ -23,6 +23,7 @@ services:
       
   nextcloud:
     image: lscr.io/linuxserver/nextcloud:latest
+    container_name: nextcloud
     user: 14001:14000
     restart: always
     ports:
