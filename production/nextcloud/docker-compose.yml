@@ -26,7 +26,7 @@ services:
     user: 14001:14000
     restart: always
     ports:
-      - 8080:80
+      - 8085:80
     volumes:
       - ${DOCKER_BASE}/nextcloud/html:/var/www/html
     networks:
