@@ -49,4 +49,15 @@ Individual users/groups are set up for different services
 | App | Use | Notes |
 | --- | --- | --- |
 | Wireguard | VPS tunnel connection | |
-| WNginxProxyManager | Reverse Proxy and SSL | |
+| NginxProxyManager | Reverse Proxy and SSL | |
+
+## Wiki
+| App | Use | Notes |
+| --- | --- | --- |
+| Wiki.js | Base Config for a Wiki.js container, can easily be duplicated | |
+
+## Production
+| App | Use | Notes |
+| --- | --- | --- |
+| Nextcloud | File and office apps | |
+| Taiga | Project/Task management | Clone the full repo [here](https://github.com/taigaio/taiga-docker/tree/main) and run the setup.sh and copy in the docker-compose from this repo |
