@@ -39,6 +39,7 @@ x-volumes:
 services:
   taiga-db:
     image: postgres:12.3
+    container_name: taiga-db
     user: 14003:14001
     environment:
       POSTGRES_DB: "taiga"
@@ -57,6 +58,7 @@ services:
 
   taiga-back:
     image: taigaio/taiga-back:latest
+    container_name: taiga-back
     user: 14004:14001
     environment: *default-back-environment
     volumes: *default-back-volumes
@@ -72,6 +74,7 @@ services:
 
   taiga-async:
     image: taigaio/taiga-back:latest
+    container_name: taiga-async
     user: 14005:14001
     entrypoint: ["/taiga-back/docker/async_entrypoint.sh"]
     environment: *default-back-environment
@@ -88,6 +91,7 @@ services:
 
   taiga-async-rabbitmq:
     image: rabbitmq:3.8-management-alpine
+    container_name: taiga-async-rabbitmq
     user: 14006:14001
     environment:
       RABBITMQ_ERLANG_COOKIE: "${RABBITMQ_ERLANG_COOKIE}"
@@ -102,6 +106,7 @@ services:
 
   taiga-front:
     image: taigaio/taiga-front:latest
+    container_name: taiga-front
     user: 14007:14001
     environment:
       TAIGA_URL: "${TAIGA_SCHEME}://${TAIGA_DOMAIN}"
@@ -115,6 +120,7 @@ services:
 
   taiga-events:
     image: taigaio/taiga-events:latest
+    container_name: taiga-events
     user: 14008:14001
     environment:
       RABBITMQ_USER: "${RABBITMQ_USER}"
@@ -128,6 +134,7 @@ services:
 
   taiga-events-rabbitmq:
     image: rabbitmq:3.8-management-alpine
+    container_name: taiga-events-rabbitmq
     user: 14009:14001
     environment:
       RABBITMQ_ERLANG_COOKIE: "${RABBITMQ_ERLANG_COOKIE}"
@@ -142,6 +149,7 @@ services:
 
   taiga-protected:
     image: taigaio/taiga-protected:latest
+    container_name: taiga-protected
     user: 14010:14001
     environment:
       MAX_AGE: "${ATTACHMENTS_MAX_AGE}"
@@ -151,6 +159,7 @@ services:
 
   taiga-gateway:
     image: nginx:1.19-alpine
+    container_name: taiga-gateway
     user: 14011:14001
     ports:
       - "9000:80"
