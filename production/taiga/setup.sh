@@ -36,3 +36,6 @@ sudo chown -R taiga-back:taiga taiga-media-data
 sudo chown -R taiga-async-rabbitmq:taiga taiga-async-rabbitmq-data
 sudo chown -R taiga-events-rabbitmq:taiga taiga-events-rabbitmq-data
 sudo chown -R taiga-gateway:taiga taiga-gateway
+
+sudo chmod -R 774 taiga-media-data
+sudo chmod -R 774 taiga-static-data
