@@ -10,7 +10,7 @@ sudo useradd taiga-events -u 14008
 sudo useradd taiga-events-rabbitmq -u 14009
 sudo useradd taiga-protected -u 14010
 sudo useradd taiga-gateway -u 14011
-sudo groupadd taiga -g 14001
+sudo groupadd taiga -g 14012
 sudo usermod -a -G taiga taiga-db
 sudo usermod -a -G taiga taiga-back
 sudo usermod -a -G taiga taiga-async
