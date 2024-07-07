@@ -26,6 +26,8 @@ Individual users/groups are set up for different services
 
 14000 - All production based containers
 
+15000 - Smart home
+
 ## Media-Server
 | App | Use | Notes |
 | --- | --- | --- |
