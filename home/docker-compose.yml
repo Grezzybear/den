@@ -8,6 +8,8 @@ services:
       - PUID=15001
       - PGID=15000
       - TZ=${TZ}
+    ports:
+      - 8123:8123
     volumes:
       - ${BASE}/config/homeassistant-config:/config
     restart: unless-stopped
