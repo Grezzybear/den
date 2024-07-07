@@ -17,24 +17,16 @@ services:
     container_name: esphome
     image: ghcr.io/esphome/esphome
     user: 15002:15000
+    networks:
+      - nginx-network
     volumes:
       - ${BASE}/config/esphome-config:/config
       - /etc/localtime:/etc/localtime:ro
     ports:
       - 6052:6052
     restart: always
-  nginx-home:
-    container_name: nginx-home
-    image: 'jc21/nginx-proxy-manager:latest'
-    restart: unless-stopped
-    environment:
-      - PUID=15003
-      - PGID=15000
-    ports:
-      # These ports are in format <host-port>:<container-port>
-      - '8055:80' # Public HTTP Port
-      - '4436:443' # Public HTTPS Port
-      - '8121:81' # Admin Web Port
-    volumes:
-      - ./config/nginxhome-config:/data
-      - ./config/letsencrypt:/etc/letsencrypt
+networks:
+  default:
+    name: home-network
+  nginx-network:
+    external: true
