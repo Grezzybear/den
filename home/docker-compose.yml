@@ -13,6 +13,8 @@ services:
       - ${BASE}/data:/config
     ports:
       - 8123:8123 #optional
+    networks:
+      - nginx-network
     restart: unless-stopped
 
 networks:
