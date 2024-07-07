@@ -9,7 +9,19 @@ services:
       - PGID=15000
       - TZ=${TZ}
     volumes:
-      - ${BASE}/data:/config
+      - ${BASE}/config/homeassistant-config:/config
     ports:
       - 8123:8123 #optional
     restart: unless-stopped
+
+  esphome:
+    container_name: esphome
+    image: ghcr.io/esphome/esphome
+    user: 15002:15000
+    volumes:
+      - ${BASE}/config/esphome-config:/config
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 6052:6052
+    restart: always
+    network_mode: host
