@@ -1,0 +1,22 @@
+version: '3.3'
+
+services:
+  homeassistant:
+    image: lscr.io/linuxserver/homeassistant:latest
+    container_name: homeassistant
+    network_mode: host
+    environment:
+      - PUID=15001
+      - PGID=15000
+      - TZ=${TZ}
+    volumes:
+      - ${BASE}/data:/config
+    ports:
+      - 8123:8123 #optional
+    restart: unless-stopped
+
+networks:
+  default:
+  nginx-network:
+    external: true
+    name: nginx-network
