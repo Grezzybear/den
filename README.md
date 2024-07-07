@@ -50,7 +50,7 @@ Individual users/groups are set up for different services
 ## Traffic-Control
 | App | Use | Notes |
 | --- | --- | --- |
-| Wireguard | VPS tunnel connection | |
+| Wireguard | VPS tunnel connection | Refer to [Cloud-Reverse-Proxy](https://github.com/N-Quan/Cloud-Reverse-Proxy) from [N-Quan](https://github.com/N-Quan) to properly enable the VPS to forward all traffic through wireguard |
 | NginxProxyManager | Reverse Proxy and SSL | |
 
 ## Wiki
@@ -63,3 +63,9 @@ Individual users/groups are set up for different services
 | --- | --- | --- |
 | Nextcloud | File and office apps | |
 | Taiga | Project/Task management | Clone the full repo [here](https://github.com/taigaio/taiga-docker/tree/main) and run the setup.sh and copy in the docker-compose from this repo |
+
+## Smart Home
+| App | Use | Notes |
+| --- | --- | --- |
+| Home Assistant | Home Automation | Need to allow port 8123 on the server and run in host mode so it can detect devices on the network |
+| ESPHOME | ESP Device management | Need to allow port 6052 on the server and run in host mode so it can detect devices on the network. Through this app we are able to flash esphome devices, but only when running through https.
