@@ -17,6 +17,9 @@ services:
     container_name: esphome
     image: ghcr.io/esphome/esphome
     user: 15002:15000
+    environment:
+      - USERNAME=admin
+      - PASSWORD=changeme
     networks:
       - nginx-network
     volumes:
