@@ -8,6 +8,8 @@ services:
       - PUID=15001
       - PGID=15000
       - TZ=${TZ}
+    networks:
+      - home-network
     ports:
       - 8123:8123
     volumes:
@@ -19,6 +21,7 @@ services:
     privileged: true
     networks:
       - nginx-network
+      - home-network
     volumes:
       - ${BASE}/config/esphome-config:/config
       - /etc/localtime:/etc/localtime:ro
