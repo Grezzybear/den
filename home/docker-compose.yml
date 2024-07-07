@@ -25,8 +25,10 @@ services:
     restart: always
   nginx-home:
     image: 'jc21/nginx-proxy-manager:latest'
-    user: 15003:15000
     restart: unless-stopped
+    environment:
+      - PUID=15003
+      - PGID=15000
     ports:
       # These ports are in format <host-port>:<container-port>
       - '8055:80' # Public HTTP Port
