@@ -12,6 +12,7 @@ services:
       - ${BASE}/config/homeassistant-config:/config
     ports:
       - 8123:8123 #optional
+    network_mode: host
     restart: unless-stopped
   esphome:
     container_name: esphome
