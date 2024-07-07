@@ -10,7 +10,6 @@ services:
       - TZ=${TZ}
     volumes:
       - ${BASE}/config/homeassistant-config:/config
-    network_mode: host
     restart: unless-stopped
   esphome:
     container_name: esphome
