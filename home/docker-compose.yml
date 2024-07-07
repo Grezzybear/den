@@ -13,7 +13,6 @@ services:
     ports:
       - 8123:8123 #optional
     restart: unless-stopped
-
   esphome:
     container_name: esphome
     image: ghcr.io/esphome/esphome
@@ -24,3 +23,15 @@ services:
     ports:
       - 6052:6052
     restart: always
+  nginx-home:
+    image: 'jc21/nginx-proxy-manager:latest'
+    user: 15003:15000
+    restart: unless-stopped
+    ports:
+      # These ports are in format <host-port>:<container-port>
+      - '8055:80' # Public HTTP Port
+      - '4436:443' # Public HTTPS Port
+      - '8191:81' # Admin Web Port
+    volumes:
+      - ./config/nginxhome-config:/data
+      - ./config/letsencrypt:/etc/letsencrypt
