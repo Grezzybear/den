@@ -17,6 +17,7 @@ services:
     container_name: esphome
     image: ghcr.io/esphome/esphome
     user: 15002:15000
+    privileged: true
     environment:
       - USERNAME=admin
       - PASSWORD=changeme
