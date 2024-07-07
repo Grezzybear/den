@@ -9,7 +9,7 @@ sudo usermod -a -G mediacenter homeassistant
 sudo mkdir -pv data/
 
 # Set permissions
-sudo chmod -R homeassistant:home data/
+sudo chown -R homeassistant:home data/
 
 # set our base env values
 echo "BASE=$(pwd)" >> .env
