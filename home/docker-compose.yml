@@ -24,6 +24,7 @@ services:
       - 6052:6052
     restart: always
   nginx-home:
+    container_name: nginx-home
     image: 'jc21/nginx-proxy-manager:latest'
     restart: unless-stopped
     environment:
