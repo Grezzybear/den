@@ -4,32 +4,20 @@ services:
   homeassistant:
     image: lscr.io/linuxserver/homeassistant:latest
     container_name: homeassistant
+    network_mode: host
     environment:
       - PUID=15001
       - PGID=15000
       - TZ=${TZ}
-    networks:
-      - home-network
-    ports:
-      - 8123:8123
     volumes:
       - ${BASE}/config/homeassistant-config:/config
     restart: unless-stopped
   esphome:
     container_name: esphome
     image: ghcr.io/esphome/esphome
+    network_mode: host
     privileged: true
-    networks:
-      - nginx-network
-      - home-network
     volumes:
       - ${BASE}/config/esphome-config:/config
       - /etc/localtime:/etc/localtime:ro
-    ports:
-      - 6052:6052
     restart: always
-networks:
-  default:
-    name: home-network
-  nginx-network:
-    external: true
