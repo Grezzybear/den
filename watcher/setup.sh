@@ -1,14 +1,11 @@
 #!/bin/bash
 
 # Make users and group
-sudo useradd dozzle -u 16001
 sudo useradd watchtower -u 16002
 sudo useradd prometheus -u 16003
 sudo useradd grafana -u 16004
 sudo useradd uptime-kuma -u 16005
 sudo groupadd watcher -g 16000
-sudo usermod -a -G watcher dozzle
-sudo usermod -a -G docker dozzle
 sudo usermod -a -G watcher watchtower
 sudo usermod -a -G docker watchtower
 sudo usermod -a -G watcher prometheus
