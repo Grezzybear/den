@@ -20,7 +20,7 @@ sudo mkdir -pv prometheus/config
 # Set permissions
 sudo chown -R prometheus:watcher prometheus
 sudo chown -R grafana:watcher grafana
-sudo chown -R uptimeKuma:watcher uptime-kuma
+sudo chown -R uptime-kuma:watcher uptime-kuma
 
 # set our base env values
 echo "BASE=$(pwd)" >> .env
