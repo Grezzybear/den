@@ -6,20 +6,24 @@ version: "3.3"
 services:
   dozzle:
     container_name: dozzle
+    user: 16001:16000
     image: amir20/dozzle:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     ports:
       - 8888:8080
+  
   watchtower:
     image: containrrr/watchtower
+    user: 16002:16000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - 8080:8080
-    #command: --interval 10 --http-api-metrics --http-api-token demotoken --debug prometheus grafana parent child
+
   prometheus:
     image: prom/prometheus
+    user: 16003:16000
     container_name: prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -27,10 +31,12 @@ services:
       - 9090:9090
     restart: unless-stopped
     volumes:
-      - ${DOCKER_BASE}/prometheus:/etc/prometheus
-      - ${DOCKER_BASE}/prometheus/prom_data:/prometheus
+      - ${BASE}/prometheus/config:/etc/prometheus
+      - ${BASE}/prometheus/data:/prometheus
+
   grafana:
     image: grafana/grafana
+    user: 16004:16000
     container_name: grafana
     ports:
       - 3000:3000
@@ -39,4 +45,14 @@ services:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=grafana
     volumes:
-      - ${DOCKER_BASE}/grafana:/etc/grafana/provisioning/datasources
+      - ${BASE}/grafana/data:/etc/grafana/provisioning/datasources
+
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    user: 16005:16000
+    container_name: uptime-kuma
+    volumes:
+      - ${BASE}/uptime-kuma/data:/app/data
+    ports:
+      - 3001:3001  # <Host Port>:<Container Port>
+    restart: always
