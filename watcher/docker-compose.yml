@@ -6,7 +6,7 @@ version: "3.3"
 services:
   dozzle:
     container_name: dozzle
-    user: 16001:16000
+    # user: 16001:16000 # this doesnt seem to like a user, even with docker permissions, so lets ignore
     image: amir20/dozzle:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
