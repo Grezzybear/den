@@ -8,7 +8,9 @@ sudo useradd grafana -u 16004
 sudo useradd uptime-kuma -u 16005
 sudo groupadd watcher -g 16000
 sudo usermod -a -G watcher dozzle
+sudo usermod -a -G docker dozzle
 sudo usermod -a -G watcher watchtower
+sudo usermod -a -G docker watchtower
 sudo usermod -a -G watcher prometheus
 sudo usermod -a -G watcher grafana
 sudo usermod -a -G watcher uptime-kuma
