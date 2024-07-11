@@ -19,7 +19,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - 8080:8080
+      - 8070:8080
 
   prometheus:
     image: prom/prometheus
@@ -54,5 +54,5 @@ services:
     volumes:
       - ${BASE}/uptime-kuma/data:/app/data
     ports:
-      - 3001:3001  # <Host Port>:<Container Port>
+      - 3009:3001  # <Host Port>:<Container Port>
     restart: always
