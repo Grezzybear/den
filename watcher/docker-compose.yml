@@ -15,7 +15,8 @@ services:
   
   watchtower:
     image: containrrr/watchtower
-    user: 16002:16000
+    container_name: watchtower
+    # user: 16002:16000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
