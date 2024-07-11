@@ -11,7 +11,7 @@ sudo usermod -a -G watcher dozzle
 sudo usermod -a -G watcher watchtower
 sudo usermod -a -G watcher prometheus
 sudo usermod -a -G watcher grafana
-sudo usermod -a -G watcher uptimeKuma
+sudo usermod -a -G watcher uptime-kuma
 
 # Make directories
 sudo mkdir -pv {prometheus,grafana,uptime-kuma}/{data}
