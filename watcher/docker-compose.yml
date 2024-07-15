@@ -63,6 +63,7 @@ services:
     
   adguardhome:
     image: adguard/adguardhome
+    container_name: adguardhome
     user: 16006:16000
     ports:
       - 53:53/tcp # plain dns over tcp
