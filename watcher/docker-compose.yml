@@ -64,7 +64,7 @@ services:
   adguardhome:
     image: adguard/adguardhome
     container_name: adguardhome
-    user: 16006:16000
+    # user: 16006:16000 # also has issues not running as root
     ports:
       - 53:53/tcp # plain dns over tcp
       - 53:53/udp # plain dns over udp
