@@ -60,3 +60,15 @@ services:
     ports:
       - 3009:3001  # <Host Port>:<Container Port>
     restart: always
+    
+  adguardhome:
+    image: adguard/adguardhome
+    user: 16006:16000
+    ports:
+      - 53:53/tcp # plain dns over tcp
+      - 53:53/udp # plain dns over udp
+      - 8090:80/tcp # http web interface
+      - 3000:3000/tcp # initial setup web interface
+    volumes:
+      - ${BASE}/adguardhome/config:/opt/adguardhome/conf # app configuration
+      - ${BASE}/adguardhome/work:/opt/adguardhome/work # app working directory
