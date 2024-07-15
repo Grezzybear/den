@@ -68,7 +68,7 @@ services:
       - 53:53/tcp # plain dns over tcp
       - 53:53/udp # plain dns over udp
       - 8090:80/tcp # http web interface
-      - 3000:3000/tcp # initial setup web interface
+      - 3002:3000/tcp # initial setup web interface
     volumes:
       - ${BASE}/adguardhome/config:/opt/adguardhome/conf # app configuration
       - ${BASE}/adguardhome/work:/opt/adguardhome/work # app working directory
