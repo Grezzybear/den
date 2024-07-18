@@ -77,6 +77,10 @@ echo "BASE=$(pwd)" >> .env
 #echo "MEDIA-GID=10000" >> .env
 echo "TZ=Etc/UTC" >> .env
 
+echo "Storage folder:"
+read -rs STORAGE
+echo "STORAGE=$STORAGE" >> .env
+
 # setup our secret env file
 echo "# these are the wireguard/gluetun variables to connect to protonvpn" >> .env.secret
 echo "VPN_ENDPOINT_IP=" >> .env.secret
