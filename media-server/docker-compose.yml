@@ -55,7 +55,7 @@ services:
       - TORRENTING_PORT=6881
     volumes:
       - ${BASE}/config/qbittorrent-config:/config
-      - ${STORAGE}/data/torrents:/data/torrents
+      - ${STORAGE}/torrents:/data/torrents
     restart: unless-stopped
     depends_on:
       - proton
@@ -73,7 +73,7 @@ services:
       - '8096:8096'
     volumes:
       - ${BASE}/config/jellyfin-config:/config
-      - ${STORAGE}/data/media:/data
+      - ${STORAGE}/media:/data
     networks:
       - media-network
       - nginx-network
@@ -94,9 +94,9 @@ services:
       - 13378:80
     volumes:
       - ${BASE}/config/audiobookshelf-config:/config
-      - ${STORAGE}/data/media/audiobooks:/audiobooks
-      - ${STORAGE}/data/media/podcasts:/podcasts
-      - ${STORAGE}/data/media/audiobookshelf-metadata:/metadata
+      - ${STORAGE}/media/audiobooks:/audiobooks
+      - ${STORAGE}/media/podcasts:/podcasts
+      - ${STORAGE}/media/audiobookshelf-metadata:/metadata
     networks:
       - media-network
       - nginx-network
@@ -136,7 +136,7 @@ services:
     volumes:
       - ${BASE}/config/prowlarr-config:/config
     restart: unless-stopped
-    depends_on: 
+    depends_on:
       - proton
     network_mode: "service:proton"
 
@@ -170,7 +170,7 @@ services:
       - UMASK=002
     volumes:
       - ${BASE}/config/sonarr-config:/config
-      - ${STORAGE}/data:/data
+      - ${STORAGE}:/data
     restart: unless-stopped
     depends_on:
       - proton
@@ -187,7 +187,7 @@ services:
       - UMASK=002
     volumes:
       - ${BASE}/config/radarr-config:/config
-      - ${STORAGE}/data:/data
+      - ${STORAGE}:/data
     restart: unless-stopped
     depends_on:
       - proton
@@ -204,7 +204,7 @@ services:
       - UMASK=002
     volumes:
       - ${BASE}/config/readarr-config:/config
-      - ${STORAGE}/data:/data
+      - ${STORAGE}:/data
     restart: unless-stopped
     depends_on:
       - proton
@@ -221,7 +221,7 @@ services:
       - UMASK=002
     volumes:
       - ${BASE}/config/lidarr-config:/config
-      - ${STORAGE}/data:/data
+      - ${STORAGE}:/data
     restart: unless-stopped
     depends_on:
       - proton
@@ -238,7 +238,7 @@ services:
       - UMASK=002
     volumes:
       - ${BASE}/config/bazarr-config:/config
-      - ${STORAGE}/data:/data
+      - ${STORAGE}:/data
     restart: unless-stopped
     depends_on:
       - proton
@@ -256,7 +256,7 @@ services:
       - DOCKER_MODS=linuxserver/mods:lazylibrarian-ffmpeg #optional
     volumes:
       - ${BASE}/config/lazylibrarian-config:/config
-      - ${STORAGE}/data:/data
+      - ${STORAGE}:/data
     restart: unless-stopped
     depends_on:
       - proton
@@ -290,7 +290,7 @@ services:
       ND_BASEURL: ""
     volumes:
       - ${BASE}/config/navidrome-config:/data
-      - ${STORAGE}/data/media/music:/music:ro
+      - ${STORAGE}/media/music:/music:ro
     networks:
       - media-network
       - nginx-network
