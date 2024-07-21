@@ -84,63 +84,63 @@ read -r MEDIABASEPATH
 
 echo "Creating volumes..."
 # MediaLibrary
-docker volume create --driver local \
+docker volume create --driver overlay2 \
     --label MediaLibrary \
     --opt type=nfs \
     --opt o=addr=$SERVERADDR,nfsvers=4,rw,nolock \
     --opt device=:$MEDIABASEPATH/media \
     MediaLibrary
 # MediaTorrents
-docker volume create --driver local \
+docker volume create --driver overlay2 \
     --label MediaTorrents \
     --opt type=nfs \
     --opt o=addr=$SERVERADDR,nfsvers=4,rw,nolock \
     --opt device=:$MEDIABASEPATH/media \
     MediaTorrents
 # MediaAudiobooks
-docker volume create --driver local \
+docker volume create --driver overlay2 \
     --label MediaAudiobooks \
     --opt type=nfs \
     --opt o=addr=$SERVERADDR,nfsvers=4,rw,nolock \
     --opt device=:$MEDIABASEPATH/media/audiobooks \
     MediaAudiobooks
 # MediaAudiobooksMetadata
-docker volume create --driver local \
+docker volume create --driver overlay2 \
     --label MediaAudiobooksMetadata \
     --opt type=nfs \
     --opt o=addr=$SERVERADDR,nfsvers=4,rw,nolock \
     --opt device=:$MEDIABASEPATH/media/audiobookshelf-metadata \
     MediaAudiobooksMetadata
 # MediaPodcasts
-docker volume create --driver local \
+docker volume create --driver overlay2 \
     --label MediaPodcasts \
     --opt type=nfs \
     --opt o=addr=$SERVERADDR,nfsvers=4,rw,nolock \
     --opt device=:$MEDIABASEPATH/media/podcasts \
     MediaPodcasts
 # MediaTv
-docker volume create --driver local \
+docker volume create --driver overlay2 \
     --label MediaTv \
     --opt type=nfs \
     --opt o=addr=$SERVERADDR,nfsvers=4,rw,nolock \
     --opt device=:$MEDIABASEPATH/media/tv \
     MediaTv
 # MediaMovies
-docker volume create --driver local \
+docker volume create --driver overlay2 \
     --label MediaMovies \
     --opt type=nfs \
     --opt o=addr=$SERVERADDR,nfsvers=4,rw,nolock \
     --opt device=:$MEDIABASEPATH/media/movies \
     MediaMovies
 # MediaBooks
-docker volume create --driver local \
+docker volume create --driver overlay2 \
     --label MediaBooks \
     --opt type=nfs \
     --opt o=addr=$SERVERADDR,nfsvers=4,rw,nolock \
     --opt device=:$MEDIABASEPATH/media/books \
     MediaBooks
 # MediaMusic
-docker volume create --driver local \
+docker volume create --driver overlay2 \
     --label MediaMusic \
     --opt type=nfs \
     --opt o=addr=$SERVERADDR,nfsvers=4,rw,nolock \
