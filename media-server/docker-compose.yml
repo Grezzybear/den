@@ -170,8 +170,7 @@ services:
       - UMASK=002
     volumes:
       - ${BASE}/config/sonarr-config:/config
-      - MediaTv:/tv
-      - MediaTorrents:/downloads
+      - MediaLibrary:/data
     restart: unless-stopped
     depends_on:
       - proton
@@ -188,8 +187,7 @@ services:
       - UMASK=002
     volumes:
       - ${BASE}/config/radarr-config:/config
-      - MediaMovies:/movies
-      - MediaTorrents:/downloads
+      - MediaLibrary:/data
     restart: unless-stopped
     depends_on:
       - proton
@@ -206,9 +204,7 @@ services:
       - UMASK=002
     volumes:
       - ${BASE}/config/readarr-config:/config
-      - MediaBooks:/books
-      - MediaAudiobooks:/audiobooks
-      - MediaTorrents:/downloads
+      - MediaLibrary:/data
     restart: unless-stopped
     depends_on:
       - proton
@@ -225,8 +221,7 @@ services:
       - UMASK=002
     volumes:
       - ${BASE}/config/lidarr-config:/config
-      - MediaMusic:/music
-      - MediaTorrents:/downloads
+      - MediaLibrary:/data
     restart: unless-stopped
     depends_on:
       - proton
@@ -243,8 +238,7 @@ services:
       - UMASK=002
     volumes:
       - ${BASE}/config/bazarr-config:/config
-      - MediaMovies:/movies
-      - MediaTv:/tv
+      - MediaLibrary:/data
     restart: unless-stopped
     depends_on:
       - proton
@@ -262,9 +256,7 @@ services:
       - DOCKER_MODS=linuxserver/mods:lazylibrarian-ffmpeg #optional
     volumes:
       - ${BASE}/config/lazylibrarian-config:/config
-      - MediaTorrents:/downloads
-      - MediaBooks:/books
-      - MediaAudiobooks:/audiobooks
+      - MediaLibrary:/data
     restart: unless-stopped
     depends_on:
       - proton
@@ -320,15 +312,6 @@ volumes:
     external: true
   MediaAudiobooksMetadata:
     name: MediaAudiobooksMetadata
-    external: true
-  MediaTv:
-    name: MediaTv
-    external: true
-  MediaMovies:
-    name: MediaMovies
-    external: true
-  MediaBooks:
-    name: MediaBooks
     external: true
   MediaMusic:
     name: MediaMusic
