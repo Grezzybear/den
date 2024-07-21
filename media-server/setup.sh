@@ -75,12 +75,77 @@ echo "BASE=$(pwd)" >> .env
 echo "TZ=Etc/UTC" >> .env
 
 echo "NAS Address:"
-read -rs SERVERADDR
-echo "SERVERADDR=$SERVERADDR" >> .env
+read -r SERVERADDR
+#echo "SERVERADDR=$SERVERADDR" >> .env
 
 echo "NAS base path to media folder:" # this is the path to the root folder, in unraid it would be the path to your share like /mnt/user/media-storage
-read -rs MEDIABASEPATH
-echo "MEDIABASEPATH=$MEDIABASEPATH" >> .env
+read -r MEDIABASEPATH
+#echo "MEDIABASEPATH=$MEDIABASEPATH" >> .env
+
+echo "Creating volumes..."
+# MediaLibrary
+docker volume create --driver local \
+    --label MediaLibrary \
+    --opt type=nfs \
+    --opt o=addr=$SERVERADDR,nfsvers=4,rw,nolock \
+    --opt device=:$MEDIABASEPATH/media \
+    MediaLibrary
+# MediaTorrents
+docker volume create --driver local \
+    --label MediaTorrents \
+    --opt type=nfs \
+    --opt o=addr=$SERVERADDR,nfsvers=4,rw,nolock \
+    --opt device=:$MEDIABASEPATH/media \
+    MediaTorrents
+# MediaAudiobooks
+docker volume create --driver local \
+    --label MediaAudiobooks \
+    --opt type=nfs \
+    --opt o=addr=$SERVERADDR,nfsvers=4,rw,nolock \
+    --opt device=:$MEDIABASEPATH/media/audiobooks \
+    MediaAudiobooks
+# MediaAudiobooksMetadata
+docker volume create --driver local \
+    --label MediaAudiobooksMetadata \
+    --opt type=nfs \
+    --opt o=addr=$SERVERADDR,nfsvers=4,rw,nolock \
+    --opt device=:$MEDIABASEPATH/media/audiobookshelf-metadata \
+    MediaAudiobooksMetadata
+# MediaPodcasts
+docker volume create --driver local \
+    --label MediaPodcasts \
+    --opt type=nfs \
+    --opt o=addr=$SERVERADDR,nfsvers=4,rw,nolock \
+    --opt device=:$MEDIABASEPATH/media/podcasts \
+    MediaPodcasts
+# MediaTv
+docker volume create --driver local \
+    --label MediaTv \
+    --opt type=nfs \
+    --opt o=addr=$SERVERADDR,nfsvers=4,rw,nolock \
+    --opt device=:$MEDIABASEPATH/media/tv \
+    MediaTv
+# MediaMovies
+docker volume create --driver local \
+    --label MediaMovies \
+    --opt type=nfs \
+    --opt o=addr=$SERVERADDR,nfsvers=4,rw,nolock \
+    --opt device=:$MEDIABASEPATH/media/movies \
+    MediaMovies
+# MediaBooks
+docker volume create --driver local \
+    --label MediaBooks \
+    --opt type=nfs \
+    --opt o=addr=$SERVERADDR,nfsvers=4,rw,nolock \
+    --opt device=:$MEDIABASEPATH/media/books \
+    MediaBooks
+# MediaMusic
+docker volume create --driver local \
+    --label MediaMusic \
+    --opt type=nfs \
+    --opt o=addr=$SERVERADDR,nfsvers=4,rw,nolock \
+    --opt device=:$MEDIABASEPATH/media/music \
+    MediaMusic
 
 # setup our secret env file
 echo "# these are the wireguard/gluetun variables to connect to protonvpn" >> .env.secret
