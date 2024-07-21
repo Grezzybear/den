@@ -35,11 +35,8 @@ sudo usermod -a -G mediacenter navidrome
 
 # Make directories
 sudo mkdir -pv config/{proton,qbittorrent,jellyfin,audiobookshelf,jellyseerr,prowlarr,flaresolverr,sonarr,radarr,readarr,lidarr,bazarr,lazylibrarian,freshrss,navidrome}-config
-sudo mkdir -pv data/{torrents,usenet,media}/{tv,movies,music,books,comics,audiobooks,podcasts,audiobookshelf-metadata}
 
 # Set permissions
-sudo chmod -R 775 data/
-sudo chown -R $(id -u):mediacenter data/
 sudo chown -R proton:mediacenter config/proton-config
 sudo chown -R qbittorrent:mediacenter config/qbittorrent-config
 sudo chown -R jellyfin:mediacenter config/jellyfin-config
@@ -77,9 +74,13 @@ echo "BASE=$(pwd)" >> .env
 #echo "MEDIA-GID=10000" >> .env
 echo "TZ=Etc/UTC" >> .env
 
-echo "Storage folder:"
-read -rs STORAGE
-echo "STORAGE=$STORAGE" >> .env
+echo "NAS Address:"
+read -rs SERVERADDR
+echo "SERVERADDR=$SERVERADDR" >> .env
+
+echo "NAS base path to media folder:" # this is the path to the root folder, in unraid it would be the path to your share like /mnt/user/media-storage
+read -rs MEDIABASEPATH
+echo "MEDIABASEPATH=$MEDIABASEPATH" >> .env
 
 # setup our secret env file
 echo "# these are the wireguard/gluetun variables to connect to protonvpn" >> .env.secret
