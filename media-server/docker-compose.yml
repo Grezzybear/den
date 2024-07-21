@@ -306,58 +306,31 @@ services:
 volumes:
   MediaLibrary:
     name: MediaLibrary
-    driver_opts:
-      type: nfs
-      o: addr=${SERVERADDR},nfsvers=4,rw,nolock
-      device: ${MEDIABASEPATH}/media
+    external: true
   MediaTorrents:
     name: MediaTorrents
-      driver_opts:
-        type: nfs
-        o: addr=${SERVERADDR},nfsvers=4,rw,nolock
-        device: ${MEDIABASEPATH}/torrents
+    external: true
   MediaAudiobooks:
     name: MediaAudiobooks
-      driver_opts:
-        type: nfs
-        o: addr=${SERVERADDR},nfsvers=4,rw,nolock
-        device: ${MEDIABASEPATH}/media/audiobooks
+    external: true
   MediaPodcasts:
     name: MediaPodcasts
-      driver_opts:
-        type: nfs
-        o: addr=${SERVERADDR},nfsvers=4,rw,nolock
-        device: ${MEDIABASEPATH}/media/podcasts
+    external: true
   MediaAudiobooksMetadata:
     name: MediaAudiobooksMetadata
-      driver_opts:
-        type: nfs
-        o: addr=${SERVERADDR},nfsvers=4,rw,nolock
-        device: ${MEDIABASEPATH}/media/audiobookshelf-metadata
+    external: true
   MediaTv:
     name: MediaTv
-      driver_opts:
-        type: nfs
-        o: addr=${SERVERADDR},nfsvers=4,rw,nolock
-        device: ${MEDIABASEPATH}/media/tv
+    external: true
   MediaMovies:
-      name: MediaMovies
-      driver_opts:
-        type: nfs
-        o: addr=${SERVERADDR},nfsvers=4,rw,nolock
-        device: ${MEDIABASEPATH}/media/movies
+    name: MediaMovies
+    external: true
   MediaBooks:
     name: MediaBooks
-      driver_opts:
-        type: nfs
-        o: addr=${SERVERADDR},nfsvers=4,rw,nolock
-        device: ${MEDIABASEPATH}/media/books
+    external: true
   MediaMusic:
     name: MediaMusic
-      driver_opts:
-        type: nfs
-        o: addr=${SERVERADDR},nfsvers=4,rw,nolock
-        device: ${MEDIABASEPATH}/media/music
+    external: true
 
 networks:
   default:
