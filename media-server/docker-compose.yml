@@ -170,7 +170,7 @@ services:
       - UMASK=002
     volumes:
       - ${BASE}/config/sonarr-config:/config
-      - MediaLibrary:/data
+      - MediaStorage:/data
     restart: unless-stopped
     depends_on:
       - proton
@@ -187,7 +187,7 @@ services:
       - UMASK=002
     volumes:
       - ${BASE}/config/radarr-config:/config
-      - MediaLibrary:/data
+      - MediaStorage:/data
     restart: unless-stopped
     depends_on:
       - proton
@@ -204,7 +204,7 @@ services:
       - UMASK=002
     volumes:
       - ${BASE}/config/readarr-config:/config
-      - MediaLibrary:/data
+      - MediaStorage:/data
     restart: unless-stopped
     depends_on:
       - proton
@@ -221,7 +221,7 @@ services:
       - UMASK=002
     volumes:
       - ${BASE}/config/lidarr-config:/config
-      - MediaLibrary:/data
+      - MediaStorage:/data
     restart: unless-stopped
     depends_on:
       - proton
@@ -238,7 +238,7 @@ services:
       - UMASK=002
     volumes:
       - ${BASE}/config/bazarr-config:/config
-      - MediaLibrary:/data
+      - MediaStorage:/data
     restart: unless-stopped
     depends_on:
       - proton
@@ -298,6 +298,9 @@ services:
     restart: unless-stopped
 
 volumes:
+  MediaStorage:
+    name: MediaStorage
+    external: true
   MediaLibrary:
     name: MediaLibrary
     external: true
