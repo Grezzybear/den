@@ -55,7 +55,7 @@ services:
       - TORRENTING_PORT=6881
     volumes:
       - ${BASE}/config/qbittorrent-config:/config
-      - ${STORAGE}/torrents:/downloads
+      - MediaTorrents:/downloads
     restart: unless-stopped
     depends_on:
       - proton
@@ -73,7 +73,7 @@ services:
       - '8096:8096'
     volumes:
       - ${BASE}/config/jellyfin-config:/config
-      - ${STORAGE}/media:/data
+      - MediaLibrary:/data
     networks:
       - media-network
       - nginx-network
@@ -94,9 +94,9 @@ services:
       - 13378:80
     volumes:
       - ${BASE}/config/audiobookshelf-config:/config
-      - ${STORAGE}/media/audiobooks:/audiobooks
-      - ${STORAGE}/media/podcasts:/podcasts
-      - ${STORAGE}/media/audiobookshelf-metadata:/metadata
+      - MediaAudiobooks:/audiobooks
+      - MediaPodcasts:/podcasts
+      - MediaAudiobooksMetadata:/metadata
     networks:
       - media-network
       - nginx-network
@@ -170,8 +170,8 @@ services:
       - UMASK=002
     volumes:
       - ${BASE}/config/sonarr-config:/config
-      - ${STORAGE}:/data
-      - ${STORAGE}/torrents:/downloads
+      - MediaTv:/tv
+      - MediaTorrents:/downloads
     restart: unless-stopped
     depends_on:
       - proton
@@ -188,8 +188,8 @@ services:
       - UMASK=002
     volumes:
       - ${BASE}/config/radarr-config:/config
-      - ${STORAGE}:/data
-      - ${STORAGE}/torrents:/downloads
+      - MediaMovies:/movies
+      - MediaTorrents:/downloads
     restart: unless-stopped
     depends_on:
       - proton
@@ -206,8 +206,8 @@ services:
       - UMASK=002
     volumes:
       - ${BASE}/config/readarr-config:/config
-      - ${STORAGE}:/data
-      - ${STORAGE}/torrents:/downloads
+      - MediaBooks:/books
+      - MediaTorrents:/downloads
     restart: unless-stopped
     depends_on:
       - proton
@@ -224,8 +224,8 @@ services:
       - UMASK=002
     volumes:
       - ${BASE}/config/lidarr-config:/config
-      - ${STORAGE}:/music
-      - ${STORAGE}/torrents:/downloads
+      - MediaMusic:/music
+      - MediaTorrents:/downloads
     restart: unless-stopped
     depends_on:
       - proton
@@ -242,8 +242,8 @@ services:
       - UMASK=002
     volumes:
       - ${BASE}/config/bazarr-config:/config
-      - ${STORAGE}/media/movies:/movies
-      - ${STORAGE}/media/tv:/tv
+      - MediaMovies:/movies
+      - MediaTv:/tv
     restart: unless-stopped
     depends_on:
       - proton
@@ -261,8 +261,8 @@ services:
       - DOCKER_MODS=linuxserver/mods:lazylibrarian-ffmpeg #optional
     volumes:
       - ${BASE}/config/lazylibrarian-config:/config
-      - ${STORAGE}/torrents:/downloads
-      - ${STORAGE}/media/books:/books
+      - MediaTorrents:/downloads
+      - MediaBooks:/books
     restart: unless-stopped
     depends_on:
       - proton
@@ -296,12 +296,68 @@ services:
       ND_BASEURL: ""
     volumes:
       - ${BASE}/config/navidrome-config:/data
-      - ${STORAGE}/media/music:/music:ro
+      - MediaMusic:/music:ro
     networks:
       - media-network
       - nginx-network
       - homepage-network
     restart: unless-stopped
+
+volumes:
+  MediaLibrary:
+    name: MediaLibrary
+    driver_opts:
+      type: nfs
+      o: addr=${SERVERADDR},nfsvers=4,rw,nolock
+      device: ${MEDIABASEPATH}/media
+  MediaTorrents:
+    name: MediaTorrents
+      driver_opts:
+        type: nfs
+        o: addr=${SERVERADDR},nfsvers=4,rw,nolock
+        device: ${MEDIABASEPATH}/torrents
+  MediaAudiobooks:
+    name: MediaAudiobooks
+      driver_opts:
+        type: nfs
+        o: addr=${SERVERADDR},nfsvers=4,rw,nolock
+        device: ${MEDIABASEPATH}/media/audiobooks
+  MediaPodcasts:
+    name: MediaPodcasts
+      driver_opts:
+        type: nfs
+        o: addr=${SERVERADDR},nfsvers=4,rw,nolock
+        device: ${MEDIABASEPATH}/media/podcasts
+  MediaAudiobooksMetadata:
+    name: MediaAudiobooksMetadata
+      driver_opts:
+        type: nfs
+        o: addr=${SERVERADDR},nfsvers=4,rw,nolock
+        device: ${MEDIABASEPATH}/media/audiobookshelf-metadata
+  MediaTv:
+    name: MediaTv
+      driver_opts:
+        type: nfs
+        o: addr=${SERVERADDR},nfsvers=4,rw,nolock
+        device: ${MEDIABASEPATH}/media/tv
+  MediaMovies:
+      name: MediaMovies
+      driver_opts:
+        type: nfs
+        o: addr=${SERVERADDR},nfsvers=4,rw,nolock
+        device: ${MEDIABASEPATH}/media/movies
+  MediaBooks:
+    name: MediaBooks
+      driver_opts:
+        type: nfs
+        o: addr=${SERVERADDR},nfsvers=4,rw,nolock
+        device: ${MEDIABASEPATH}/media/books
+  MediaMusic:
+    name: MediaMusic
+      driver_opts:
+        type: nfs
+        o: addr=${SERVERADDR},nfsvers=4,rw,nolock
+        device: ${MEDIABASEPATH}/media/music
 
 networks:
   default:
