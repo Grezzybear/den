@@ -207,7 +207,7 @@ services:
     volumes:
       - ${BASE}/config/readarr-config:/config
       - MediaBooks:/books
-      - MediaAudioBooks:/audiobooks
+      - MediaAudiobooks:/audiobooks
       - MediaTorrents:/downloads
     restart: unless-stopped
     depends_on:
@@ -264,7 +264,7 @@ services:
       - ${BASE}/config/lazylibrarian-config:/config
       - MediaTorrents:/downloads
       - MediaBooks:/books
-      - MediaAudioBooks:/audiobooks
+      - MediaAudiobooks:/audiobooks
     restart: unless-stopped
     depends_on:
       - proton
