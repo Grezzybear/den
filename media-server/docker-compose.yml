@@ -55,7 +55,7 @@ services:
       - TORRENTING_PORT=6881
     volumes:
       - ${BASE}/config/qbittorrent-config:/config
-      - MediaTorrents:/downloads
+      - MediaLibrary:/data
     restart: unless-stopped
     depends_on:
       - proton
@@ -303,9 +303,6 @@ volumes:
     external: true
   MediaLibrary:
     name: MediaLibrary
-    external: true
-  MediaTorrents:
-    name: MediaTorrents
     external: true
   MediaAudiobooks:
     name: MediaAudiobooks
