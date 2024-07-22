@@ -55,7 +55,7 @@ services:
       - TORRENTING_PORT=6881
     volumes:
       - ${BASE}/config/qbittorrent-config:/config
-      - MediaLibrary:/data
+      - MediaStorage:/data
     restart: unless-stopped
     depends_on:
       - proton
