@@ -97,13 +97,6 @@ docker volume create --driver local \
     --opt o=addr=$SERVERADDR,rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14,nfsvers=4 \
     --opt device=:$MEDIABASEPATH/media \
     MediaLibrary
-# MediaTorrents
-docker volume create --driver local \
-    --label MediaTorrents \
-    --opt type=nfs \
-    --opt o=addr=$SERVERADDR,rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14,nfsvers=4 \
-    --opt device=:$MEDIABASEPATH/torrents \
-    MediaTorrents
 # MediaAudiobooks
 docker volume create --driver local \
     --label MediaAudiobooks \
