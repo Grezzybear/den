@@ -16,7 +16,7 @@ services:
     networks:
       - homepage-network
     ports:
-      - 3000:3000
+      - 3003:3000
     volumes:
       - ${BASE}/config/homepage-config:/app/config # Make sure your local config directory exists
       - ${BASE}/images:/app/public/images
