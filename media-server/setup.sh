@@ -74,6 +74,14 @@ echo "BASE=$(pwd)" >> .env
 #echo "MEDIA-GID=10000" >> .env
 echo "TZ=Etc/UTC" >> .env
 
+echo "Qbittorrent Username (you have to use this password when you set up qbittorrent for the first time):"
+read -r QBITUN
+echo "Qbittorrent Password (you have to use this password when you set up qbittorrent for the first time):"
+read -rs QBITPW
+
+echo "QBITUN=$QBITUN" >> .env
+echo "QBITPW=$QBITPW" >> .env
+
 echo "NAS Address:"
 read -r SERVERADDR
 #echo "SERVERADDR=$SERVERADDR" >> .env
