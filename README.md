@@ -36,7 +36,7 @@ Individual users/groups are set up for different services
 | Gluetun | VPN network connection | Im using ProtonVPN for my VPN |
 | Speedtest-Tracker | Checks upload and download speeds through the VPN connection | Good to keep an eye on upload and download speeds through the VPN connection |
 | QBitToorent-NatMap | Gets a forwarded port through the VPN for QBitTorrent to use and automatically sets it | A lovely little app that makes port forwarding much easier with QBitTorrent |
-| QBitTorrent| Torrenting | You can find web ui replacements [here]([https://github.com/VueTorrent/VueTorrent?tab=readme-ov-file](https://github.com/qbittorrent/qBittorrent/wiki/List-of-known-alternate-WebUIs)) |
+| QBitTorrent| Torrenting | You can find web ui replacements [here](https://github.com/qbittorrent/qBittorrent/wiki/List-of-known-alternate-WebUIs) |
 | Jellyfin | Media viewing | |
 | Audiobookshelf | Audiobook streaming | |
 | Jellyseerr | Media request service | |
