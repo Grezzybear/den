@@ -77,7 +77,7 @@ services:
 # tracks the speed from your home network
   speedtest-tracker:
     image: lscr.io/linuxserver/speedtest-tracker:latest
-    container_name: speedtest-tracker
+    container_name: speedtest-tracker-home
     environment:
       - PUID=16007
       - PGID=16000
