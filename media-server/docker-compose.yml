@@ -47,7 +47,7 @@ services:
 # tracks the speed through protonvpn
   speedtest-tracker:
     image: lscr.io/linuxserver/speedtest-tracker:latest
-    container_name: speedtest-tracker
+    container_name: speedtest-tracker-proton
     environment:
       - PUID=10016
       - PGID=10000
