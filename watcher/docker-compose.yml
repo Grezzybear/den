@@ -73,3 +73,28 @@ services:
     volumes:
       - ${BASE}/adguardhome/config:/opt/adguardhome/conf # app configuration
       - ${BASE}/adguardhome/work:/opt/adguardhome/work # app working directory
+
+# tracks the speed from your home network
+  speedtest-tracker:
+    image: lscr.io/linuxserver/speedtest-tracker:latest
+    container_name: speedtest-tracker
+    environment:
+      - PUID=16007
+      - PGID=16000
+      - TZ=${TZ}
+      - APP_KEY=${SPEEDTESTKEY} # generate a key here: https://speedtest-tracker.dev
+      - DB_CONNECTION=sqlite
+      - SPEEDTEST_SCHEDULE=*/15 * * * * # every 15 minutes
+#      - SPEEDTEST_SERVERS=
+#      - DB_HOST= #optional
+#      - DB_PORT= #optional
+#      - DB_DATABASE= #optional
+#      - DB_USERNAME= #optional
+#      - DB_PASSWORD= #optional
+      - DISPLAY_TIMEZONE=${TZ} #optional
+      - PRUNE_RESULTS_OLDER_THAN=0 #optional
+    ports:
+      - 8093:80
+    volumes:
+      - ${BASE}/config/speedtesttracker-config:/config
+    restart: unless-stopped
