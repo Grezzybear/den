@@ -96,5 +96,5 @@ services:
     ports:
       - 8093:80
     volumes:
-      - ${BASE}/config/speedtesttracker-config:/config
+      - ${BASE}/speedtest-tracker/config/:/config
     restart: unless-stopped
