@@ -85,6 +85,11 @@ read -rs QBITPW
 echo "QBITUN=$QBITUN" >> .env
 echo "QBITPW=$QBITPW" >> .env
 
+echo "speedtest-tracker app key (generate a key here: https://speedtest-tracker.dev):"
+read -r SPEEDTESTKEY
+
+echo "SPEEDTESTKEY=$SPEEDTESTKEY" >> .env
+
 echo "NAS Address:"
 read -r SERVERADDR
 #echo "SERVERADDR=$SERVERADDR" >> .env
