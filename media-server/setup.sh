@@ -16,6 +16,7 @@ sudo useradd bazarr -u 10012
 sudo useradd lazylibrarian -u 10013
 sudo useradd freshrss -u 10014
 sudo useradd navidrome -u 10015
+sudo useradd protonSpeedTest -u 10016
 sudo groupadd mediacenter -g 10000
 sudo usermod -a -G mediacenter proton
 sudo usermod -a -G mediacenter qbittorrent
@@ -32,9 +33,10 @@ sudo usermod -a -G mediacenter bazarr
 sudo usermod -a -G mediacenter lazylibrarian
 sudo usermod -a -G mediacenter freshrss
 sudo usermod -a -G mediacenter navidrome
+sudo usermod -a -G mediacenter protonSpeedTest
 
 # Make directories
-sudo mkdir -pv config/{proton,qbittorrent,jellyfin,audiobookshelf,jellyseerr,prowlarr,flaresolverr,sonarr,radarr,readarr,lidarr,bazarr,lazylibrarian,freshrss,navidrome}-config
+sudo mkdir -pv config/{proton,qbittorrent,jellyfin,audiobookshelf,jellyseerr,prowlarr,flaresolverr,sonarr,radarr,readarr,lidarr,bazarr,lazylibrarian,freshrss,navidrome,speedtesttracker}-config
 
 # Set permissions
 sudo chown -R proton:mediacenter config/proton-config
@@ -52,6 +54,7 @@ sudo chown -R bazarr:mediacenter config/bazarr-config
 sudo chown -R lazylibrarian:mediacenter config/lazylibrarian-config
 sudo chown -R freshrss:mediacenter config/freshrss-config
 sudo chown -R navidrome:mediacenter config/navidrome-config
+sudo chown -R protonSpeedTest:mediacenter config/speedtesttracker-config
 
 # set our base env values
 #echo "UID=$(id -u)" >> .env
