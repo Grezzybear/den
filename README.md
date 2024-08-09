@@ -5,7 +5,7 @@ References/Reading
 - [EZARR](https://github.com/Luctia/ezarr/tree/main)
 - [Servarr Wiki](https://wiki.servarr.com/docker-guide)
 - [Cloud-Reverse-Proxy](https://github.com/N-Quan/Cloud-Reverse-Proxy)
-- [TRaSH's Guides For Hardlinks](https://trash-guides.info/Hardlinks/Hardlinks-and-Instant-Moves/)
+- [TRaSH's Guides For Hardlinks](https://trash-guides.info/Hardlinks/Hardlinks-and-Instant-Moves/) (really all of TRaSH Guides are invaluable)
 ---
 
 This started as me just exploring docker compose and organizing my media so I started writing all these somewhat manually.
@@ -18,7 +18,7 @@ Individual users/groups are set up for different services
 
 10000 - Media-Server things
 
-11000 - Anything that deals with network traffic like traffic-control and pihole
+11000 - Anything that deals with network traffic like traffic-control
 
 12000 - Dashboard user/groups
 
@@ -28,10 +28,14 @@ Individual users/groups are set up for different services
 
 15000 - Smart home
 
+16000 - Data collection/visualization
+
 ## Media-Server
 | App | Use | Notes |
 | --- | --- | --- |
-| Gluetun | VPN network connection | |
+| Gluetun | VPN network connection | Im using ProtonVPN for my VPN |
+| Speedtest-Tracker | Checks upload and download speeds through the VPN connection | Good to keep an eye on upload and download speeds through the VPN connection |
+| QBitToorent-NatMap | Gets a forwarded port through the VPN for QBitTorrent to use and automatically sets it | A lovely little app that makes port forwarding much easier with QBitTorrent |
 | QBitTorrent| Torrenting | The best [WebUI replacement](https://github.com/VueTorrent/VueTorrent?tab=readme-ov-file) I have found |
 | Jellyfin | Media viewing | |
 | Audiobookshelf | Audiobook streaming | |
@@ -51,7 +55,7 @@ Individual users/groups are set up for different services
 | App | Use | Notes |
 | --- | --- | --- |
 | Wireguard | VPS tunnel connection | Refer to [Cloud-Reverse-Proxy](https://github.com/N-Quan/Cloud-Reverse-Proxy) from [N-Quan](https://github.com/N-Quan) to properly enable the VPS to forward all traffic through wireguard |
-| NginxProxyManager | Reverse Proxy and SSL | |
+| NginxProxyManager | Reverse Proxy and SSL | Set up all your nice little public facing domain names. This is where SSL is easily set up with Let's Encrypt. SSL is terminated here. |
 
 ## Wiki
 | App | Use | Notes |
@@ -68,4 +72,15 @@ Individual users/groups are set up for different services
 | App | Use | Notes |
 | --- | --- | --- |
 | Home Assistant | Home Automation | Need to allow port 8123 on the server and run in host mode so it can detect devices on the network |
-| ESPHOME | ESP Device management | Need to allow port 6052 on the server and run in host mode so it can detect devices on the network. Through this app we are able to flash esphome devices, but only when running through https.
+| ESPHOME | ESP Device management | Need to allow port 6052 on the server and run in host mode so it can detect devices on the network. Through this app we are able to flash esphome devices, but only when running through https. |
+
+## Watcher
+| App | Use | Notes |
+| --- | --- | --- |
+| Dozzle | Easy way to view container logs from a web browser | |
+| Watchtower | Easily update the running version of containers | |
+| Prometheus | Data collection | If a container on this page can export data, I track that data |
+| Grafana | Data visualization | Visualizes all my data and organizes all my dashboards so I can get see metrics at a glance |
+| Uptime-Kuma | Tracks uptime for my apps, local and web | |
+| Adguardhome | Free and open source, powerful network-wide ads & trackers blocking DNS server | Very useful for directing domain names to local addresses so you dont have to continually type ip addresses and ports |
+| Speedtest-Tracker | Checks upload and download speeds from your network | Useful information to keep track of to make sure you are getting the service you are paying for and track if there are any issues with your speeds |
