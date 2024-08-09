@@ -49,6 +49,5 @@ read -rs DOZZLEPASS
 
 docker run amir20/dozzle generate $DOZZLEUSER --password $DOZZLEPASS --email $DOZZLEEMAIL --name "$NAME" > ./dozzle/data/users.yml
 
-echo "$NEXTCLOUD_USER" >> secrets/nextcloud_admin_user.txt
 echo "BASE=$(pwd)" >> .env
 echo "TZ=Etc/UTC" >> .env
