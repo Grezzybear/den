@@ -143,7 +143,7 @@ services:
       JWT_SECRET: ${JWT_SECRET}
       TZ: ${TZ}
     ports:
-      - "3000:3000" #Server Port
+      - 3010:3000 #Server Port
     volumes:
       - ${BASE}/config/jellystat-config:/app/backend/backup-data # Mounting the volume
     depends_on:
