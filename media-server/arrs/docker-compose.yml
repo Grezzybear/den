@@ -115,25 +115,6 @@ services:
       - proton
     network_mode: "service:proton"
 
-  # for media browsing
-  jellyfin:
-    image: lscr.io/linuxserver/jellyfin:latest
-    container_name: jellyfin
-    environment:
-      - PUID=10003
-      - PGID=10000
-      - UMASK=002
-    ports:
-      - '8096:8096'
-    volumes:
-      - ${BASE}/config/jellyfin-config:/config
-      - MediaLibrary:/data
-    networks:
-      - media-network
-      - nginx-network
-      - homepage-network
-    restart: 'unless-stopped'
-
 # jellyfin stats db
   jellystat-db:
     image: postgres:15.2
@@ -160,29 +141,6 @@ services:
       - ${BASE}/config/jellystat-config:/app/backend/backup-data # Mounting the volume
     depends_on:
       - jellystat-db
-    restart: unless-stopped
-
-  # for listening to audio books
-  audiobookshelf:
-    image: ghcr.io/advplyr/audiobookshelf:latest
-    container_name: audiobookshelf
-    user: 10004:10000
-    environment:
-      - TZ=${TZ}
-      - UMASK=002
-      - PUID=10004
-      - PGID=10000
-    ports:
-      - 13378:80
-    volumes:
-      - ${BASE}/config/audiobookshelf-config:/config
-      - MediaAudiobooks:/audiobooks
-      - MediaPodcasts:/podcasts
-      - MediaAudiobooksMetadata:/metadata
-    networks:
-      - media-network
-      - nginx-network
-      - homepage-network
     restart: unless-stopped
 
   # for media requests
@@ -357,26 +315,6 @@ services:
       - ${BASE}/config/freshrss-config:/config
     ports:
       - 8080:80
-    restart: unless-stopped
-
-  # for music streaming
-  navidrome:
-    image: deluan/navidrome:latest
-    container_name: navidrome
-    user: 10015:10000
-    ports:
-      - "4533:4533"
-    environment:
-      ND_SCANSCHEDULE: 1h
-      ND_LOGLEVEL: info  
-      ND_BASEURL: ""
-    volumes:
-      - ${BASE}/config/navidrome-config:/data
-      - MediaMusic:/music:ro
-    networks:
-      - media-network
-      - nginx-network
-      - homepage-network
     restart: unless-stopped
 
 volumes:
