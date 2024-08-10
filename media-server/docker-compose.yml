@@ -69,6 +69,7 @@ services:
       - proton
     network_mode: "service:proton"
     restart: unless-stopped
+    
   # requests you a port with protonvpn and goes into qbittorrent and adds it as the torrenting port so you can properly upload
   qbittorrent-natmap:
     # https://github.com/soxfor/qbittorrent-natmap
@@ -94,6 +95,7 @@ services:
         condition: service_started
       proton:
         condition: service_healthy
+        
   # for downloading torrents
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
@@ -131,6 +133,34 @@ services:
       - nginx-network
       - homepage-network
     restart: 'unless-stopped'
+
+# jellyfin stats db
+  jellystat-db:
+    image: postgres:15.2
+    environment:
+      POSTGRES_DB: 'jfstat'
+      POSTGRES_USER: ${JELLYSTATUN}
+      POSTGRES_PASSWORD: ${JELLYSTATPW}
+    volumes:
+    - ${BASE}/config/jellystat-db-config:/var/lib/postgresql/data # Mounting the volume
+
+# jellyfin stats
+  jellystat:
+    image: cyfershepard/jellystat:latest
+    environment:
+      POSTGRES_USER: ${JELLYSTATUN}
+      POSTGRES_PASSWORD: ${JELLYSTATPW}
+      POSTGRES_IP: jellystat-db
+      POSTGRES_PORT: 5432
+      JWT_SECRET: ${JWT_SECRET}
+      TZ: ${TZ}
+    ports:
+      - "3000:3000" #Server Port
+    volumes:
+      - ${BASE}/config/jellystat-config:/app/backend/backup-data # Mounting the volume
+    depends_on:
+      - jellystat-db
+    restart: unless-stopped
 
   # for listening to audio books
   audiobookshelf:
