@@ -79,10 +79,13 @@ echo "TZ=Etc/UTC" >> media-apps/.env
 echo "Jellystat DB Username:"
 read -r JELLYSTATUN
 echo "Jellystat DB Password:"
-read -r JELLYSTATPW
+read -rs JELLYSTATPW
+echo "Jellystat Secret (generate a random key yourself):"
+read -rs JWT_SECRET
 
 echo "JELLYSTATUN=$JELLYSTATUN" >> arrs/.env
 echo "JELLYSTATPW=$JELLYSTATPW" >> arrs/.env
+echo "JWT_SECRET=$JWT_SECRET" >> arrs/.env
 
 echo "Qbittorrent Username (you have to use this password when you set up qbittorrent for the first time):"
 read -r QBITUN
