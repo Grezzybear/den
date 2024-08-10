@@ -39,21 +39,21 @@ sudo usermod -a -G mediacenter jellystat-db
 # Make directories
 sudo mkdir -pv arrs/config/{proton,qbittorrent,jellyseerr,prowlarr,flaresolverr,sonarr,radarr,readarr,lidarr,bazarr,lazylibrarian,freshrss,speedtesttracker,jellystat-db,jellystat}
 # Set permissions
-sudo chown -R proton:mediacenter config/proton-config
-sudo chown -R qbittorrent:mediacenter config/qbittorrent-config
-sudo chown -R jellyseerr:mediacenter config/jellyseerr-config
-sudo chown -R prowlarr:mediacenter config/prowlarr-config
-sudo chown -R flaresolverr:mediacenter config/flaresolverr-config
-sudo chown -R sonarr:mediacenter config/sonarr-config
-sudo chown -R radarr:mediacenter config/radarr-config
-sudo chown -R readarr:mediacenter config/readarr-config
-sudo chown -R lidarr:mediacenter config/lidarr-config
-sudo chown -R bazarr:mediacenter config/bazarr-config
-sudo chown -R lazylibrarian:mediacenter config/lazylibrarian-config
-sudo chown -R freshrss:mediacenter config/freshrss-config
-sudo chown -R protonSpeedTest:mediacenter config/speedtesttracker-config
-sudo chown -R jellystat-db:mediacenter config/jellystat-db-config
-sudo chown -R jellystat:mediacenter config/jellystat-config
+sudo chown -R proton:mediacenter arrs/config/proton-config
+sudo chown -R qbittorrent:mediacenter arrs/config/qbittorrent-config
+sudo chown -R jellyseerr:mediacenter arrs/config/jellyseerr-config
+sudo chown -R prowlarr:mediacenter arrs/config/prowlarr-config
+sudo chown -R flaresolverr:mediacenter arrs/config/flaresolverr-config
+sudo chown -R sonarr:mediacenter arrs/config/sonarr-config
+sudo chown -R radarr:mediacenter arrs/config/radarr-config
+sudo chown -R readarr:mediacenter arrs/config/readarr-config
+sudo chown -R lidarr:mediacenter arrs/config/lidarr-config
+sudo chown -R bazarr:mediacenter arrs/config/bazarr-config
+sudo chown -R lazylibrarian:mediacenter arrs/config/lazylibrarian-config
+sudo chown -R freshrss:mediacenter arrs/config/freshrss-config
+sudo chown -R protonSpeedTest:mediacenter arrs/config/speedtesttracker-config
+sudo chown -R jellystat-db:mediacenter arrs/config/jellystat-db-config
+sudo chown -R jellystat:mediacenter arrs/config/jellystat-config
 
 # media-apps
 sudo useradd jellyfin -u 10001
@@ -65,9 +65,9 @@ sudo usermod -a -G mediacenter navidrome
 # Make directories
 sudo mkdir -pv media-apps/config/{jellyfin,audiobookshelf,navidrome}
 # Set permissions
-sudo chown -R jellyfin:mediacenter config/jellyfin-config
-sudo chown -R audiobookshelf:mediacenter config/audiobookshelf-config
-sudo chown -R navidrome:mediacenter config/navidrome-config
+sudo chown -R jellyfin:mediacenter media-apps/config/jellyfin-config
+sudo chown -R audiobookshelf:mediacenter media-apps/config/audiobookshelf-config
+sudo chown -R navidrome:mediacenter media-apps/config/navidrome-config
 
 
 # set our base env values
