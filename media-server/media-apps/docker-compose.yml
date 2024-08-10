@@ -6,7 +6,7 @@ services:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
     environment:
-      - PUID=10003
+      - PUID=10001
       - PGID=10000
       - UMASK=002
     ports:
@@ -24,11 +24,11 @@ services:
   audiobookshelf:
     image: ghcr.io/advplyr/audiobookshelf:latest
     container_name: audiobookshelf
-    user: 10004:10000
+    user: 10002:10000
     environment:
       - TZ=${TZ}
       - UMASK=002
-      - PUID=10004
+      - PUID=10002
       - PGID=10000
     ports:
       - 13378:80
@@ -47,7 +47,7 @@ services:
   navidrome:
     image: deluan/navidrome:latest
     container_name: navidrome
-    user: 10015:10000
+    user: 10003:10000
     ports:
       - "4533:4533"
     environment:
