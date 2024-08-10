@@ -8,7 +8,7 @@ sudo useradd proton -u 10101
 sudo useradd protonSpeedTest -u 10102
 sudo useradd qbittorrentNatMap -u 10103
 sudo useradd qbittorrent -u 10104
-sudo useradd jellystatdb -u 10105
+#sudo useradd jellystatdb -u 10105
 sudo useradd jellystat -u 10106
 sudo useradd jellyseerr -u 10107
 sudo useradd prowlarr -u 10108
@@ -35,7 +35,7 @@ sudo usermod -a -G mediacenter lazylibrarian
 sudo usermod -a -G mediacenter freshrss
 sudo usermod -a -G mediacenter protonSpeedTest
 sudo usermod -a -G mediacenter jellystat
-sudo usermod -a -G mediacenter jellystatdb
+#sudo usermod -a -G mediacenter jellystatdb
 # Make directories
 sudo mkdir -pv arrs/config/{proton,qbittorrent,jellyseerr,prowlarr,flaresolverr,sonarr,radarr,readarr,lidarr,bazarr,lazylibrarian,freshrss,speedtesttracker,jellystat-db,jellystat}
 # Set permissions
@@ -52,7 +52,7 @@ sudo chown -R bazarr:mediacenter arrs/config/bazarr
 sudo chown -R lazylibrarian:mediacenter arrs/config/lazylibrarian
 sudo chown -R freshrss:mediacenter arrs/config/freshrss
 sudo chown -R protonSpeedTest:mediacenter arrs/config/speedtesttracker
-sudo chown -R jellystatdb:mediacenter arrs/config/jellystat-db
+#sudo chown -R jellystatdb:mediacenter arrs/config/jellystat-db
 sudo chown -R jellystat:mediacenter arrs/config/jellystat
 
 # media-apps
