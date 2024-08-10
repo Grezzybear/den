@@ -17,6 +17,8 @@ sudo useradd lazylibrarian -u 10013
 sudo useradd freshrss -u 10014
 sudo useradd navidrome -u 10015
 sudo useradd protonSpeedTest -u 10016
+sudo useradd jellystat -u 10017
+sudo useradd jellystatdb -u 10018
 sudo groupadd mediacenter -g 10000
 sudo usermod -a -G mediacenter proton
 sudo usermod -a -G mediacenter qbittorrent
@@ -34,9 +36,11 @@ sudo usermod -a -G mediacenter lazylibrarian
 sudo usermod -a -G mediacenter freshrss
 sudo usermod -a -G mediacenter navidrome
 sudo usermod -a -G mediacenter protonSpeedTest
+sudo usermod -a -G mediacenter jellystat
+sudo usermod -a -G mediacenter jellystat-db
 
 # Make directories
-sudo mkdir -pv config/{proton,qbittorrent,jellyfin,audiobookshelf,jellyseerr,prowlarr,flaresolverr,sonarr,radarr,readarr,lidarr,bazarr,lazylibrarian,freshrss,navidrome,speedtesttracker}-config
+sudo mkdir -pv config/{proton,qbittorrent,jellyfin,audiobookshelf,jellyseerr,prowlarr,flaresolverr,sonarr,radarr,readarr,lidarr,bazarr,lazylibrarian,freshrss,navidrome,speedtesttracker,jellystat-db,jellystat}-config
 
 # Set permissions
 sudo chown -R proton:mediacenter config/proton-config
@@ -55,6 +59,8 @@ sudo chown -R lazylibrarian:mediacenter config/lazylibrarian-config
 sudo chown -R freshrss:mediacenter config/freshrss-config
 sudo chown -R navidrome:mediacenter config/navidrome-config
 sudo chown -R protonSpeedTest:mediacenter config/speedtesttracker-config
+sudo chown -R jellystat-db:mediacenter config/jellystat-db-config
+sudo chown -R jellystat:mediacenter config/jellystat-config
 
 # set our base env values
 #echo "UID=$(id -u)" >> .env
@@ -76,6 +82,14 @@ echo "BASE=$(pwd)" >> .env
 #echo "NAVIDROME-UID=10015" >> .env
 #echo "MEDIA-GID=10000" >> .env
 echo "TZ=Etc/UTC" >> .env
+
+echo "Jellystat DB Username:"
+read -r JELLYSTATUN
+echo "Jellystat DB Password:"
+read -r JELLYSTATPW
+
+echo "JELLYSTATUN=$JELLYSTATUN" >> .env
+echo "JELLYSTATPW=$JELLYSTATPW" >> .env
 
 echo "Qbittorrent Username (you have to use this password when you set up qbittorrent for the first time):"
 read -r QBITUN
