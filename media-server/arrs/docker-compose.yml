@@ -34,7 +34,7 @@ services:
       - DNS_ADDRESS=127.0.0.11 # necessary as this is dockers dns address and by default it will set to 127.0.0.1 which wont resolve container names
       - VPN_SERVICE_PROVIDER=protonvpn
       - VPN_TYPE=wireguard
-      - PUID=10001
+      - PUID=10101
       - PGID=10000
       - WIREGUARD_ADDRESSES=10.2.0.2/32
       - TZ=${TZ}
@@ -49,7 +49,7 @@ services:
     image: lscr.io/linuxserver/speedtest-tracker:latest
     container_name: speedtest-tracker-proton
     environment:
-      - PUID=10016
+      - PUID=10102
       - PGID=10000
       - TZ=${TZ}
       - APP_KEY=${SPEEDTESTKEY} # generate a key here: https://speedtest-tracker.dev
@@ -66,7 +66,8 @@ services:
     volumes:
       - ${BASE}/config/speedtesttracker-config:/config
     depends_on:
-      - proton
+      proton:
+        condition: service_healthy
     network_mode: "service:proton"
     restart: unless-stopped
     
@@ -75,6 +76,7 @@ services:
     # https://github.com/soxfor/qbittorrent-natmap
     image: ghcr.io/soxfor/qbittorrent-natmap:latest
     container_name: qbittorrent-natmap
+    user: 10103:10000
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -101,7 +103,7 @@ services:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
     environment:
-      - PUID=10002
+      - PUID=10104
       - PGID=10000
       - TZ=${TZ}
       - UMASK=002
@@ -112,12 +114,14 @@ services:
       - MediaStorage:/data
     restart: unless-stopped
     depends_on:
-      - proton
+      proton:
+        condition: service_healthy
     network_mode: "service:proton"
 
 # jellyfin stats db
   jellystat-db:
     image: postgres:15.2
+    user: 10106:10000
     environment:
       POSTGRES_DB: 'jfstat'
       POSTGRES_USER: ${JELLYSTATUN}
@@ -128,6 +132,7 @@ services:
 # jellyfin stats
   jellystat:
     image: cyfershepard/jellystat:latest
+    user: 10106:10000
     environment:
       POSTGRES_USER: ${JELLYSTATUN}
       POSTGRES_PASSWORD: ${JELLYSTATPW}
@@ -147,7 +152,7 @@ services:
   jellyseerr:
     image: fallenbagel/jellyseerr:latest
     container_name: jellyseerr
-    user: 10005:10000
+    user: 10107:10000
     environment:
       - LOG_LEVEL=debug
       - TZ=${TZ}
@@ -169,7 +174,7 @@ services:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
     environment:
-      - PUID=10006
+      - PUID=10108
       - PGID=10000
       - TZ=${TZ}
       - UMASK=002
@@ -177,7 +182,8 @@ services:
       - ${BASE}/config/prowlarr-config:/config
     restart: unless-stopped
     depends_on:
-      - proton
+      proton:
+        condition: service_healthy
     network_mode: "service:proton"
 
   # indexer proxy
@@ -185,17 +191,18 @@ services:
     # DockerHub mirror flaresolverr/flaresolverr:latest
     image: ghcr.io/flaresolverr/flaresolverr:latest
     container_name: flaresolverr
-    user: 10007:10000
+    user: 10109:10000
     environment:
       - LOG_LEVEL=${LOG_LEVEL:-info}
       - LOG_HTML=${LOG_HTML:-false}
       - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
-      - PUID=10007
+      - PUID=10109
       - PGID=10000
       - TZ=${TZ}
       - UMASK=002
     depends_on: 
-      - proton
+      proton:
+        condition: service_healthy
     network_mode: "service:proton"
     restart: unless-stopped
 
@@ -204,7 +211,7 @@ services:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
     environment:
-      - PUID=10008
+      - PUID=10110
       - PGID=10000
       - TZ=${TZ}
       - UMASK=002
@@ -213,7 +220,8 @@ services:
       - MediaStorage:/data
     restart: unless-stopped
     depends_on:
-      - proton
+      proton:
+        condition: service_healthy
     network_mode: "service:proton"
 
   # for movies
@@ -221,7 +229,7 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     environment:
-      - PUID=10009
+      - PUID=10111
       - PGID=10000
       - TZ=${TZ}
       - UMASK=002
@@ -230,7 +238,8 @@ services:
       - MediaStorage:/data
     restart: unless-stopped
     depends_on:
-      - proton
+      proton:
+        condition: service_healthy
     network_mode: "service:proton"
 
   # for books
@@ -238,7 +247,7 @@ services:
     image: lscr.io/linuxserver/readarr:develop
     container_name: readarr
     environment:
-      - PUID=10010
+      - PUID=10112
       - PGID=10000
       - TZ=${TZ}
       - UMASK=002
@@ -247,7 +256,8 @@ services:
       - MediaStorage:/data
     restart: unless-stopped
     depends_on:
-      - proton
+      proton:
+        condition: service_healthy
     network_mode: "service:proton"
 
   # for music
@@ -255,7 +265,7 @@ services:
     image: lscr.io/linuxserver/lidarr:latest
     container_name: lidarr
     environment:
-      - PUID=10011
+      - PUID=10113
       - PGID=10000
       - TZ=${TZ}
       - UMASK=002
@@ -264,7 +274,8 @@ services:
       - MediaStorage:/data
     restart: unless-stopped
     depends_on:
-      - proton
+      proton:
+        condition: service_healthy
     network_mode: "service:proton"
 
   # for subtitles
@@ -272,7 +283,7 @@ services:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
     environment:
-      - PUID=10012
+      - PUID=10114
       - PGID=10000
       - TZ=${TZ}
       - UMASK=002
@@ -281,7 +292,8 @@ services:
       - MediaStorage:/data
     restart: unless-stopped
     depends_on:
-      - proton
+      proton:
+        condition: service_healthy
     network_mode: "service:proton"
 
   # for book metadata
@@ -289,7 +301,7 @@ services:
     image: lscr.io/linuxserver/lazylibrarian:latest
     container_name: lazylibrarian
     environment:
-      - PUID=10013
+      - PUID=10115
       - PGID=10000
       - TZ=${TZ}
       - UMASK=002
@@ -299,7 +311,8 @@ services:
       - MediaLibrary:/data
     restart: unless-stopped
     depends_on:
-      - proton
+      proton:
+        condition: service_healthy
     network_mode: "service:proton"
 
   # for rss feeds
@@ -307,7 +320,7 @@ services:
     image: lscr.io/linuxserver/freshrss:latest
     container_name: freshrss
     environment:
-      - PUID=10014
+      - PUID=10116
       - PGID=10000
       - TZ=${TZ}
       - UMASK=002
