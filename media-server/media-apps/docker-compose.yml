@@ -12,7 +12,7 @@ services:
     ports:
       - '8096:8096'
     volumes:
-      - ${BASE}/config/jellyfin-config:/config
+      - ${BASE}/config/jellyfin:/config
       - MediaLibrary:/data
     networks:
       - media-network
@@ -33,7 +33,7 @@ services:
     ports:
       - 13378:80
     volumes:
-      - ${BASE}/config/audiobookshelf-config:/config
+      - ${BASE}/config/audiobookshelf:/config
       - MediaAudiobooks:/audiobooks
       - MediaPodcasts:/podcasts
       - MediaAudiobooksMetadata:/metadata
@@ -55,7 +55,7 @@ services:
       ND_LOGLEVEL: info  
       ND_BASEURL: ""
     volumes:
-      - ${BASE}/config/navidrome-config:/data
+      - ${BASE}/config/navidrome:/data
       - MediaMusic:/music:ro
     networks:
       - media-network
