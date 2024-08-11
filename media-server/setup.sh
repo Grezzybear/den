@@ -6,7 +6,7 @@ sudo groupadd mediacenter -g 10000
 # arrs
 sudo useradd proton -u 10101
 sudo useradd protonSpeedTest -u 10102
-sudo useradd qbittorrentNatMap -u 10103
+#sudo useradd qbittorrentNatMap -u 10103
 sudo useradd qbittorrent -u 10104
 #sudo useradd jellystatdb -u 10105
 sudo useradd jellystat -u 10106
