@@ -3,7 +3,7 @@
 # Make users and group
 sudo useradd homeassistant -u 15001
 sudo useradd esphome -u 15002
-sudo useradd mealie -u 15003
+sudo useradd mealie -u 15004
 sudo groupadd home -g 15000
 sudo usermod -a -G home homeassistant
 sudo usermod -a -G home mealie
