@@ -33,6 +33,11 @@ services:
       POSTGRES_SERVER: mealie-db
       POSTGRES_PORT: 5432
       POSTGRES_DB: mealie
+      # email settings
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_FROM_EMAIL: ${SMTP_FROM_EMAIL}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
     depends_on:
       mealie-db:
         condition: service_healthy
