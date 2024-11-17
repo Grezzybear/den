@@ -25,7 +25,7 @@ services:
       TZ: ${TZ}
       MAX_WORKERS: 1
       WEB_CONCURRENCY: 1
-      BASE_URL: https://meal.burrow.boo
+      BASE_URL: ${BASE_URL}
       # Database Settings
       DB_ENGINE: postgres
       POSTGRES_USER: ${MEALIEDBUN}
