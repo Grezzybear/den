@@ -17,7 +17,7 @@ services:
     environment:
       # Set Backend ENV Variables Here
       ALLOW_SIGNUP: "false"
-      PUID: 15003
+      PUID: 15004
       PGID: 15000
       TZ: ${TZ}
       MAX_WORKERS: 1
