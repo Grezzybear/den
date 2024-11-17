@@ -46,6 +46,7 @@ services:
     networks:
       - default
     environment:
+      POSTGRES_DB: mealie
       POSTGRES_PASSWORD: ${MEALIEDBPW}
       POSTGRES_USER: ${MEALIEDBUN}
     healthcheck:
