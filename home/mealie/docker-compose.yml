@@ -16,7 +16,7 @@ services:
       - ${BASE}/mealie/config/mealie:/app/data/
     networks:
       - nginx-network
-      - mealie-network
+      - default
     environment:
       # Set Backend ENV Variables Here
       ALLOW_SIGNUP: "false"
@@ -44,7 +44,7 @@ services:
     volumes:
       - ${BASE}/mealie/config/mealie-db:/var/lib/postgresql/data
     networks:
-      - mealie-network
+      - default
     environment:
       POSTGRES_PASSWORD: ${MEALIEDBPW}
       POSTGRES_USER: ${MEALIEDBUN}
@@ -56,7 +56,6 @@ services:
 
 networks:
   default:
-    name: mealie-network
   nginx-network:
     external: true
     name: nginx-network
