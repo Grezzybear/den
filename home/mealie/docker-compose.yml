@@ -1,0 +1,56 @@
+version: '3.3'
+
+services:
+  # for recipe management
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:v2.2.0 # 
+    container_name: mealie
+    restart: always
+    ports:
+        - "9925:9000" # 
+    deploy:
+      resources:
+        limits:
+          memory: 1000M # 
+    volumes:
+      - ${BASE}/config/mealie:/app/data/
+    environment:
+      # Set Backend ENV Variables Here
+      ALLOW_SIGNUP: "false"
+      PUID: 15002
+      PGID: 15000
+      TZ: ${TZ}
+      MAX_WORKERS: 1
+      WEB_CONCURRENCY: 1
+      BASE_URL: https://meal.burrow.boo
+      # Database Settings
+      DB_ENGINE: postgres
+      POSTGRES_USER: ${MEALIEDBUN}
+      POSTGRES_PASSWORD: ${MEALIEDBPW}
+      POSTGRES_SERVER: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: mealie
+    depends_on:
+      mealie-db:
+        condition: service_healthy
+  # mealie database
+  mealie-db:
+    container_name: mealie-db
+    image: postgres:15
+    restart: always
+    volumes:
+      - ${BASE}/config/mealie-db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${MEALIEDBPW}
+      POSTGRES_USER: ${MEALIEDBUN}
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+networks:
+  default:
+  nginx-network:
+    external: true
+    name: nginx-network
