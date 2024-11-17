@@ -14,6 +14,8 @@ services:
           memory: 1000M # 
     volumes:
       - ${BASE}/mealie/config/mealie:/app/data/
+    networks:
+      - nginx-network
     environment:
       # Set Backend ENV Variables Here
       ALLOW_SIGNUP: "false"
