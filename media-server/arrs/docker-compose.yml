@@ -44,6 +44,7 @@ services:
       # Server list updater
       # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
       - UPDATER_PERIOD=24h
+    restart: unless-stopped
 # tracks the speed through protonvpn
   speedtest-tracker:
     image: lscr.io/linuxserver/speedtest-tracker:latest
@@ -77,7 +78,7 @@ services:
     image: ghcr.io/soxfor/qbittorrent-natmap:latest
     container_name: qbittorrent-natmap
 #    user: 10103:10000
-    restart: unless-stopped
+    restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
@@ -112,7 +113,7 @@ services:
     volumes:
       - ${BASE}/config/qbittorrent:/config
       - MediaStorage:/data
-    restart: unless-stopped
+    restart: always
     depends_on:
       proton:
         condition: service_healthy
@@ -181,7 +182,7 @@ services:
       - UMASK=002
     volumes:
       - ${BASE}/config/prowlarr:/config
-    restart: unless-stopped
+    restart: always
     depends_on:
       proton:
         condition: service_healthy
@@ -205,7 +206,7 @@ services:
       proton:
         condition: service_healthy
     network_mode: "service:proton"
-    restart: unless-stopped
+    restart: always
 
   # for tv
   sonarr:
@@ -219,7 +220,7 @@ services:
     volumes:
       - ${BASE}/config/sonarr:/config
       - MediaStorage:/data
-    restart: unless-stopped
+    restart: always
     depends_on:
       proton:
         condition: service_healthy
@@ -237,7 +238,7 @@ services:
     volumes:
       - ${BASE}/config/radarr:/config
       - MediaStorage:/data
-    restart: unless-stopped
+    restart: always
     depends_on:
       proton:
         condition: service_healthy
@@ -255,7 +256,7 @@ services:
     volumes:
       - ${BASE}/config/readarr:/config
       - MediaStorage:/data
-    restart: unless-stopped
+    restart: always
     depends_on:
       proton:
         condition: service_healthy
@@ -273,7 +274,7 @@ services:
     volumes:
       - ${BASE}/config/lidarr:/config
       - MediaStorage:/data
-    restart: unless-stopped
+    restart: always
     depends_on:
       proton:
         condition: service_healthy
@@ -291,7 +292,7 @@ services:
     volumes:
       - ${BASE}/config/bazarr:/config
       - MediaStorage:/data
-    restart: unless-stopped
+    restart: always
     depends_on:
       proton:
         condition: service_healthy
@@ -310,7 +311,7 @@ services:
     volumes:
       - ${BASE}/config/lazylibrarian:/config
       - MediaLibrary:/data
-    restart: unless-stopped
+    restart: always
     depends_on:
       proton:
         condition: service_healthy
@@ -329,7 +330,7 @@ services:
       - ${BASE}/config/freshrss:/config
     ports:
       - 8080:80
-    restart: unless-stopped
+    restart: always
 
 volumes:
   MediaStorage:
