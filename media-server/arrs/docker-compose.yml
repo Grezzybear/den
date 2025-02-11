@@ -14,7 +14,6 @@ services:
       - 6881:6881/udp # qbittorrent
       - 8085:8085 # qbittorrent
       - 9696:9696 # prowlarr
-      - 8191:8191 # flaresolverr
       - 8989:8989 # sonarr
       - 7878:7878 # radarr
       - 8787:8787 # readarr
