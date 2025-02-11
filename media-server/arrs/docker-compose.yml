@@ -188,26 +188,6 @@ services:
         condition: service_healthy
     network_mode: "service:proton"
 
-  # indexer proxy
-  flaresolverr:
-    # DockerHub mirror flaresolverr/flaresolverr:latest
-    image: ghcr.io/flaresolverr/flaresolverr:v3.3.21
-    container_name: flaresolverr
-    user: 10109:10000
-    environment:
-      - LOG_LEVEL=${LOG_LEVEL:-info}
-      - LOG_HTML=${LOG_HTML:-false}
-      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
-      - PUID=10109
-      - PGID=10000
-      - TZ=${TZ}
-      - UMASK=002
-    depends_on: 
-      proton:
-        condition: service_healthy
-    network_mode: "service:proton"
-    restart: always
-
   # for tv
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
