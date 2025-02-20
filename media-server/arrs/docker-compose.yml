@@ -289,7 +289,7 @@ services:
       - DOCKER_MODS=linuxserver/mods:lazylibrarian-ffmpeg #optional
     volumes:
       - ${BASE}/config/lazylibrarian:/config
-      - MediaLibrary:/data
+      - MediaStorage:/data
     restart: always
     depends_on:
       proton:
