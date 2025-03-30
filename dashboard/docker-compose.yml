@@ -11,6 +11,7 @@ services:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
     environment:
+      HOMEPAGE_ALLOWED_HOSTS: ${HOST}
       PUID: 12001
       PGID: 12000
     networks:
