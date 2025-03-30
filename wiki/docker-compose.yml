@@ -6,7 +6,10 @@ services:
   dokuwiki-personal:
     image: lscr.io/linuxserver/dokuwiki:latest
     container_name: dokuwiki-personal
-    user: 13001:13000
+    environment:
+      - PUID=13001
+      - PGID=13000
+      - TZ=Etc/UTC
     env_file:
       - .env
     volumes:
