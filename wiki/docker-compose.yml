@@ -3,35 +3,22 @@
 version: '3.3'
 
 services:
-  wikipersonaldb:
-    image: postgres:16
-    container_name: wikipersonaldb
-    user: 13002:13000
-    restart: unless-stopped
-    networks:
-      - wiki-personal-network
-    env_file:
-      - .env  
-    volumes:
-      - ${BASE}/postgresql:/var/lib/postgresql/data
-
-  wikipersonal:
-    image: ghcr.io/requarks/wiki:2
-    container_name: wikipersonal
+  dokuwiki-personal:
+    image: lscr.io/linuxserver/dokuwiki:latest
+    container_name: dokuwiki-personal
     user: 13001:13000
     env_file:
       - .env
-    networks:
+    volumes:
+      - ${BASE}/data:/config
+      networks:
       - wiki-personal-network
       - nginx-personalwiki
       - homepage-network
-    volumes:
-      - ${BASE}/data:/wiki/data
-    depends_on:
-      - wikipersonaldb
-    restart: unless-stopped
     ports:
-      - "${PORT}:3000"
+      - 80:80
+      - 443:443 #optional
+    restart: unless-stopped
 
 networks:
   wiki-personal-network:
