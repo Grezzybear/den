@@ -56,11 +56,11 @@ Individual users/groups are set up for different services
 | --- | --- | --- | --- |
 | Wireguard | [lscr.io/linuxserver/wireguard](https://docs.linuxserver.io/images/docker-wireguard) | VPS tunnel connection | Refer to [Cloud-Reverse-Proxy](https://github.com/N-Quan/Cloud-Reverse-Proxy) from [N-Quan](https://github.com/N-Quan) to properly enable the VPS to forward all traffic through wireguard |
 | NginxProxyManager | [jc21/nginx-proxy-manager](https://hub.docker.com/r/jc21/nginx-proxy-manager) | Reverse Proxy and SSL | Set up all your nice little public facing domain names. This is where SSL is easily set up with Let's Encrypt. SSL is terminated here. |
-
+https://docs.linuxserver.io/images/docker-dokuwiki/
 ## Wiki
 | App | Image | Use | Notes |
 | --- | --- | --- | --- |
-| Wiki.js | [ghcr.io/requarks/wiki](https://hub.docker.com/r/requarks/wiki) | Digital notebook |  Base Config for a Wiki.js container, can easily be duplicated |
+| Dokuwiki | [lscr.io/linuxserver/dokuwiki](https://docs.linuxserver.io/images/docker-dokuwiki/) | Digital notebook |  Base Config for a Dokuwiki container, can easily be duplicated |
 
 ## Production
 | App | Image | Use | Notes |
