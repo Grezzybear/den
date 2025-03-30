@@ -18,3 +18,4 @@ echo "BASE=$(pwd)" >> .env
 echo "HOMEPAGE-UID=12001" >> .env
 echo "DASHBOARD-GID=12000" >> .env
 echo "TZ=Etc/UTC" >> .env
+echo "HOMEPAGE_ALLOWED_HOSTS=" >> .env
