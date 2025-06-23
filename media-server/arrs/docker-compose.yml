@@ -38,11 +38,14 @@ services:
       - WIREGUARD_ADDRESSES=10.2.0.2/32
       - TZ=${TZ}
       - UMASK=002
-      # - SERVER_COUNTRIES= # add countries here
-      # - SERVER_CITIES= # add cities here
       # Server list updater
       # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
       - UPDATER_PERIOD=24h
+      # VPN server port forwarding: Custom port forwarding up/down command
+      # https://github.com/qdm12/gluetun-wiki/blob/main/setup/advanced/vpn-port-forwarding.md#custom-port-forwarding-updown-command
+      - PORT_FORWARD_ONLY=on
+      - VPN_PORT_FORWARDING=on
+      - VPN_PORT_FORWARDING_UP_COMMAND=/bin/sh -c 'wget -O- --retry-connrefused --post-data "json={\"listen_port\":{{PORTS}}}" http://127.0.0.1:8085/api/v2/app/setPreferences 2>&1'
     restart: unless-stopped
 # tracks the speed through protonvpn
   speedtest-tracker:
@@ -71,32 +74,32 @@ services:
     network_mode: "service:proton"
     restart: unless-stopped
     
-  # requests you a port with protonvpn and goes into qbittorrent and adds it as the torrenting port so you can properly upload
-  qbittorrent-natmap:
-    # https://github.com/soxfor/qbittorrent-natmap
-    image: ghcr.io/soxfor/qbittorrent-natmap:latest
-    container_name: qbittorrent-natmap
-#    user: 10103:10000
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    environment:
-      - TZ=Etc/UTC
-      - QBITTORRENT_SERVER=10.2.0.2
-      - QBITTORRENT_PORT=8085
-      - QBITTORRENT_USER=${QBITUN}
-      - QBITTORRENT_PASS=${QBITPW}
-      # - VPN_GATEWAY=
-      - VPN_CT_NAME=proton
-      # - VPN_IF_NAME=tun0
-      # - CHECK_INTERVAL=300
-      # - NAT_LEASE_LIFETIME=300
-    network_mode: "service:proton"
-    depends_on:
-      qbittorrent:
-        condition: service_started
-      proton:
-        condition: service_healthy
+#   # requests you a port with protonvpn and goes into qbittorrent and adds it as the torrenting port so you can properly upload
+#   qbittorrent-natmap:
+#     # https://github.com/soxfor/qbittorrent-natmap
+#     image: ghcr.io/soxfor/qbittorrent-natmap:latest
+#     container_name: qbittorrent-natmap
+# #    user: 10103:10000
+#     restart: always
+#     volumes:
+#       - /var/run/docker.sock:/var/run/docker.sock:ro
+#     environment:
+#       - TZ=Etc/UTC
+#       - QBITTORRENT_SERVER=10.2.0.2
+#       - QBITTORRENT_PORT=8085
+#       - QBITTORRENT_USER=${QBITUN}
+#       - QBITTORRENT_PASS=${QBITPW}
+#       # - VPN_GATEWAY=
+#       - VPN_CT_NAME=proton
+#       # - VPN_IF_NAME=tun0
+#       # - CHECK_INTERVAL=300
+#       # - NAT_LEASE_LIFETIME=300
+#     network_mode: "service:proton"
+#     depends_on:
+#       qbittorrent:
+#         condition: service_started
+#       proton:
+#         condition: service_healthy
         
   # for downloading torrents
   qbittorrent:
