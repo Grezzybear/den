@@ -53,7 +53,7 @@ services:
     environment:
       ND_SCANSCHEDULE: 1h
       ND_LOGLEVEL: info  
-      ND_BASEURL: ""
+      ND_BASEURL: ${ND_BASEURL}
     volumes:
       - ${BASE}/config/navidrome:/data
       - MediaMusic:/music:ro
