@@ -164,3 +164,7 @@ echo "VPN_ENDPOINT_IP=" >> arrs/.env.secret
 echo "WIREGUARD_PUBLIC_KEY=" >> arrs/.env.secret
 echo "WIREGUARD_PRIVATE_KEY=" >> arrs/.env.secret
 echo "Make sure to set your Public and Private Keys in arrs/.env.secret"
+
+echo "Navidrome Base URL:"
+read -r NAVIDROMEURL
+echo "ND_BASEURL=$NAVIDROMEURL" >> media-apps/.env
