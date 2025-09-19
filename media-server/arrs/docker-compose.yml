@@ -227,22 +227,22 @@ services:
     network_mode: "service:proton"
 
   # for books
-  readarr:
-    image: lscr.io/linuxserver/readarr:develop
-    container_name: readarr
-    environment:
-      - PUID=10112
-      - PGID=10000
-      - TZ=${TZ}
-      - UMASK=002
-    volumes:
-      - ${BASE}/config/readarr:/config
-      - MediaStorage:/data
-    restart: always
-    depends_on:
-      proton:
-        condition: service_healthy
-    network_mode: "service:proton"
+  # readarr:
+  #   image: lscr.io/linuxserver/readarr:develop
+  #   container_name: readarr
+  #   environment:
+  #     - PUID=10112
+  #     - PGID=10000
+  #     - TZ=${TZ}
+  #     - UMASK=002
+  #   volumes:
+  #     - ${BASE}/config/readarr:/config
+  #     - MediaStorage:/data
+  #   restart: always
+  #   depends_on:
+  #     proton:
+  #       condition: service_healthy
+  #   network_mode: "service:proton"
 
   # for music
   lidarr:
